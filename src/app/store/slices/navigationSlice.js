@@ -6,17 +6,10 @@ const navigationSlice = createSlice({
     lastSearch: null,
     references: [],
     historic: [],
-    isSavedInReference: false,
   },
   reducers: {
     setLastSearch(state, action) {
       state.lastSearch = action.payload;
-
-      if (state.references.includes(action.payload)) {
-        state.isSavedInReference = true;
-      } else if (!!state.isSavedInReference) {
-        state.isSavedInReference = false;
-      }
     },
     addNewHistoric(state, action) {
       state.historic.push(...action.paylaod);
@@ -29,8 +22,11 @@ const navigationSlice = createSlice({
     clearHistoric(state, _) {
       state.historic = [];
     },
-    addNewReferences(state, action) {
-      state.references.push(...action.paylaod);
+    addNewReferences(state, _) {
+      state.references.push({
+        id: state.references.length + 1,
+        url: state.lastSearch,
+      });
     },
     removeReferences(state, action) {
       state.references = state.references.filter(

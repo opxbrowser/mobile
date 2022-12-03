@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useEffect, useMemo, useRef } from "react";
 import {
   View,
   Text,
@@ -7,11 +7,18 @@ import {
   useWindowDimensions,
 } from "react-native";
 
+import { useSelector, useDispatch } from "react-redux";
+
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 
+import { addNewReferences } from "../app/store/slices/navigationSlice";
+
 const OptionsBox = forwardRef((props, ref) => {
   const tw = useTailwind();
+  const { references, lastSearch } = useSelector((state) => state.navigation);
+  const dispatch = useDispatch();
+
   const { height } = useWindowDimensions();
   const containerAnimation = useRef(new Animated.Value(0)).current;
 
@@ -36,6 +43,11 @@ const OptionsBox = forwardRef((props, ref) => {
     }
   }, [ref, containerAnimation]);
 
+  const isReferenceSaved = useMemo(
+    () => references.find((item) => item.url == lastSearch),
+    [references, lastSearch]
+  );
+
   return (
     <Animated.View
       style={[
@@ -59,12 +71,16 @@ const OptionsBox = forwardRef((props, ref) => {
       <OptionItem
         icon={
           <MaterialCommunityIcons
-            name="attachment"
+            name={!!isReferenceSaved ? "check-decagram" : "attachment"}
             size={22}
             color={tw("text-primary").color}
           />
         }
-        title="Save as reference"
+        title={
+          !!isReferenceSaved ? "Saved in your references" : "Save as reference"
+        }
+        disabled={isReferenceSaved}
+        onPress={() => dispatch(addNewReferences())}
       />
       <OptionItem
         icon={
@@ -100,11 +116,11 @@ const OptionsBox = forwardRef((props, ref) => {
   );
 });
 
-const OptionItem = ({ onPress, icon, title }) => {
+const OptionItem = ({ onPress, icon, title, disabled = false }) => {
   const tw = useTailwind();
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} disabled={disabled}>
       <View style={tw("justify-center items-center")}>
         <View
           style={tw(
