@@ -26,8 +26,6 @@ export default function App() {
     WorkSans_700Bold,
   });
 
-  console.log(fontsLoaded);
-
   if (!fontsLoaded) return null;
 
   return (

@@ -13,7 +13,7 @@ const Home = () => {
 
   return (
     <View style={tw("flex-1 bg-white")}>
-      <EmptyState />
+      {!lastSearch && <EmptyState />}
       <InputBoss />
     </View>
   );
