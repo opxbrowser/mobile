@@ -1,6 +1,11 @@
 import { useRef } from "react";
 import { useState, useEffect } from "react";
-import { View, SafeAreaView, KeyboardAvoidingView } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Keyboard,
+} from "react-native";
 
 import { WebView } from "react-native-webview";
 
@@ -21,6 +26,21 @@ const Home = () => {
   const lastSearch = useSelector((state) => state.navigation.lastSearch);
 
   const [searchAddress, setSearchAddress] = useState("");
+  const [hideOptions, setHideOptions] = useState(false);
+
+  useEffect(() => {
+    let keyboard = [];
+
+    keyboard[0] = Keyboard.addListener("keyboardDidShow", () => {
+      setHideOptions(true);
+    });
+
+    keyboard[1] = Keyboard.addListener("keyboardDidHide", () => {
+      setHideOptions(false);
+    });
+
+    return () => keyboard.map((item) => item.remove());
+  }, []);
 
   const handleSearchAddress = () => {
     let newSearchAddress = searchAddress;
@@ -51,6 +71,7 @@ const Home = () => {
           optionsRef={refBoxOptions}
           onChangeText={(text) => setSearchAddress(text)}
           pressOnSearch={handleSearchAddress}
+          hideOptions={hideOptions}
         />
       </KeyboardAvoidingView>
     </SafeAreaView>
