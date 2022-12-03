@@ -16,6 +16,13 @@ module.exports = {
           DEFAULT: "#F5F5F5",
         },
       },
+      fontFamily: {
+        wLight: "WorkSans_300Light",
+        wRegular: "WorkSans_400Regular",
+        wMeidum: "WorkSans_500Medium",
+        wSemibold: "WorkSans_600SemiBold",
+        wBold: "WorkSans_700Bold",
+      },
     },
   },
   plugins: [],
