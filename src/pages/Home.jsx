@@ -7,6 +7,7 @@ import { setLastSearch } from "../app/store/slices/navigationSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useTailwind } from "tailwind-rn";
 
+import OptionsBox from "../components/OptionsBox";
 import EmptyState from "../components/EmptyState";
 import InputBoss from "../components/InputBoss";
 import isAndroid from "../utils/isAndroid";
@@ -40,6 +41,7 @@ const Home = () => {
         behavior={!isAndroid() ? "padding" : "height"}
       >
         {!lastSearch && <EmptyState />}
+        <OptionsBox />
         {lastSearch && (
           <WebView style={tw("flex-1")} source={{ uri: lastSearch }} />
         )}
