@@ -1,6 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { TailwindProvider } from "tailwind-rn";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
+
 import {
   useFonts,
   WorkSans_300Light,
@@ -24,15 +26,19 @@ export default function App() {
     WorkSans_700Bold,
   });
 
+  console.log(fontsLoaded);
+
   if (!fontsLoaded) return null;
 
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <TailwindProvider utilities={utilities}>
-          <Routes />
-        </TailwindProvider>
-      </NavigationContainer>
-    </Provider>
+    <SafeAreaProvider>
+      <TailwindProvider utilities={utilities}>
+        <Provider store={store}>
+          <NavigationContainer>
+            <Routes />
+          </NavigationContainer>
+        </Provider>
+      </TailwindProvider>
+    </SafeAreaProvider>
   );
 }
