@@ -1,3 +1,11 @@
+.absolute {
+  position: absolute
+}
+
+.relative {
+  position: relative
+}
+
 .m-4 {
   margin: 1rem
 }
@@ -31,6 +39,10 @@
 
 .ml-2 {
   margin-left: 0.5rem
+}
+
+.flex {
+  display: flex
 }
 
 .h-40 {

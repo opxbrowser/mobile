@@ -1,4 +1,14 @@
 {
+	"absolute": {
+		"style": {
+			"position": "absolute"
+		}
+	},
+	"relative": {
+		"style": {
+			"position": "relative"
+		}
+	},
 	"m-4": {
 		"style": {
 			"marginTop": 16,
@@ -46,6 +56,11 @@
 	"ml-2": {
 		"style": {
 			"marginLeft": 8
+		}
+	},
+	"flex": {
+		"style": {
+			"display": "flex"
 		}
 	},
 	"h-40": {
