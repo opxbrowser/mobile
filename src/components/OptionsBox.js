@@ -1,19 +1,48 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { forwardRef, useEffect, useRef } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Animated,
+  useWindowDimensions,
+} from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 
-const OptionsBox = () => {
+const OptionsBox = forwardRef((props, ref) => {
   const tw = useTailwind();
+  const { height } = useWindowDimensions();
+  const containerAnimation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (ref) {
+      ref.current = {
+        open: () => {
+          Animated.spring(containerAnimation, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true,
+          }).start();
+        },
+        close: () => {
+          Animated.spring(containerAnimation, {
+            toValue: 0,
+            duration: 500,
+            useNativeDriver: true,
+          }).start();
+        },
+      };
+    }
+  }, [ref, containerAnimation]);
 
   return (
-    <View
+    <Animated.View
       style={[
-        tw(
-          "bg-gray absolute mx-4 z-10 rounded-xl px-6 py-4 flex-row self-center"
-        ),
+        tw("bg-gray absolute mx-4 rounded-xl px-6 py-4 flex-row self-center"),
         {
+          zIndex: 1,
+          opacity: containerAnimation,
           bottom: 90,
           elevation: 10,
           shadowOffset: {
@@ -22,6 +51,14 @@ const OptionsBox = () => {
           },
           shadowOpacity: 0.1,
           shadowRadius: 5,
+          transform: [
+            {
+              translateY: containerAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [height + 200, 0],
+              }),
+            },
+          ],
         },
       ]}
     >
@@ -65,9 +102,9 @@ const OptionsBox = () => {
         }
         title="More"
       />
-    </View>
+    </Animated.View>
   );
-};
+});
 
 const OptionItem = ({ onPress, icon, title }) => {
   const tw = useTailwind();

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -11,8 +12,10 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import isAndroid from "../utils/isAndroid";
 
-const InputBoss = ({ pressOnSearch, ...rest }) => {
+const InputBoss = ({ pressOnSearch, optionsRef, ...rest }) => {
   const tw = useTailwind();
+
+  const [boxOpened, setBoxOpened] = useState(false);
 
   return (
     <View>
@@ -37,12 +40,31 @@ const InputBoss = ({ pressOnSearch, ...rest }) => {
 
         <ButtonBoss
           icon={
-            <MaterialCommunityIcons
-              name="chevron-up"
-              color={tw("text-primary").color}
-              size={22}
-            />
+            boxOpened ? (
+              <MaterialCommunityIcons
+                name="close"
+                color={tw("text-primary").color}
+                size={boxOpened ? 18 : 22}
+              />
+            ) : (
+              <MaterialCommunityIcons
+                name="chevron-up"
+                color={tw("text-primary").color}
+                size={22}
+              />
+            )
           }
+          onPress={() => {
+            if (!!boxOpened) {
+              optionsRef?.current?.close();
+              setBoxOpened(false);
+              return;
+            }
+
+            optionsRef?.current?.open();
+            setBoxOpened(true);
+            return;
+          }}
           containerStyle={tw("px-6 bg-gray")}
         />
         <ButtonBoss

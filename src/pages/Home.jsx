@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useState, useEffect } from "react";
 import { View, SafeAreaView, KeyboardAvoidingView } from "react-native";
 
@@ -16,6 +17,7 @@ const Home = () => {
   const tw = useTailwind();
   const dispatch = useDispatch();
 
+  const refBoxOptions = useRef(null);
   const lastSearch = useSelector((state) => state.navigation.lastSearch);
 
   const [searchAddress, setSearchAddress] = useState("");
@@ -41,12 +43,13 @@ const Home = () => {
         behavior={!isAndroid() ? "padding" : "height"}
       >
         {!lastSearch && <EmptyState />}
-        <OptionsBox />
+        <OptionsBox ref={refBoxOptions} />
         {lastSearch && (
           <WebView style={tw("flex-1")} source={{ uri: lastSearch }} />
         )}
         <InputBoss
           value={searchAddress}
+          optionsRef={refBoxOptions}
           onChangeText={(text) => setSearchAddress(text)}
           pressOnSearch={handleSearchAddress}
         />
