@@ -1,12 +1,14 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 
+import isAndroid from "../utils/isAndroid";
+
 const InputBoss = (props) => {
   const tw = useTailwind();
 
   return (
-    <View>
-      <View style={[tw("bg-primary w-full"), { height: 1 }]} />
+    <View style={{ marginBottom: !isAndroid() ? 15 : 0 }}>
+      <View style={[tw("bg-primary-200 w-full"), { height: 1 }]} />
       <View style={tw("m-4 flex-row items-center justify-evenly")}>
         <TextInput
           {...props}
