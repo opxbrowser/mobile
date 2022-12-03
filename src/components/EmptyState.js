@@ -4,22 +4,27 @@ import { useTailwind } from "tailwind-rn/dist";
 
 import LottieView from "lottie-react-native";
 
+import isAndroid from "../utils/isAndroid";
+import source from "../assets/animations/emptyloadingpurple.json";
+
 const EmptyState = () => {
   const tw = useTailwind();
   const animation = useRef(null);
   return (
     <View style={tw("flex-1 justify-center items-center bg-white")}>
-      <LottieView
-        ref={animation}
-        autoPlay
-        style={{
-          width: 200,
-          height: 200,
-          backgroundColor: "#FFFFFF",
-        }}
-        loop
-        source={require("../assets/animations/emptyloadingpurple.json")}
-      />
+      {!isAndroid() && (
+        <LottieView
+          ref={animation}
+          autoPlay
+          style={{
+            width: 200,
+            height: 200,
+            backgroundColor: "#FFFFFF",
+          }}
+          loop
+          source={source}
+        />
+      )}
       <View style={tw("mx-8")}>
         <Text style={tw("text-center text-lg font-wRegular text-primary-400")}>
           To fly we need to have space and OPX helps you with that.

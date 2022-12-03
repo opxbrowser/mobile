@@ -274,6 +274,18 @@
 			"paddingBottom": 16
 		}
 	},
+	"py-1": {
+		"style": {
+			"paddingTop": 4,
+			"paddingBottom": 4
+		}
+	},
+	"py-1.5": {
+		"style": {
+			"paddingTop": 6,
+			"paddingBottom": 6
+		}
+	},
 	"text-center": {
 		"style": {
 			"textAlign": "center"

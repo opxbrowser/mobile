@@ -25,7 +25,11 @@ const InputBoss = memo(
           <TextInput
             {...rest}
             style={[
-              tw("bg-gray px-6 py-2.5 rounded-2xl font-wRegular mr-2 flex-1"),
+              tw(
+                `bg-gray px-6 ${
+                  !isAndroid() ? "py-2.5" : "py-1.5"
+                } rounded-2xl font-wRegular mr-2 flex-1`
+              ),
               {
                 fontSize: 16,
               },
