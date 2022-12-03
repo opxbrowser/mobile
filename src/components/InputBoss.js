@@ -68,7 +68,7 @@ const InputBoss = ({ pressOnSearch, optionsRef, ...rest }) => {
           containerStyle={tw("px-6 bg-gray")}
         />
         <ButtonBoss
-          title="Ir"
+          title="Go"
           containerStyle={tw("ml-2")}
           onPress={pressOnSearch}
         />
