@@ -32,7 +32,6 @@ const Home = () => {
       newSearchAddress = `https://${newSearchAddress}`;
     }
 
-    setSearchAddress(newSearchAddress);
     dispatch(setLastSearch(newSearchAddress));
   };
 
