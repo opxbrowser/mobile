@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 
@@ -8,6 +9,10 @@ import isAndroid from "../utils/isAndroid";
 const InputBoss = (props) => {
   const tw = useTailwind();
 
+  const [focused, setFocused] = useState(false);
+
+  console.log(focused);
+
   return (
     <View style={{ marginBottom: !isAndroid() ? 15 : 0 }}>
       <View style={[tw("bg-primary-200 w-full"), { height: 1 }]} />
@@ -17,8 +22,12 @@ const InputBoss = (props) => {
           style={tw(
             "bg-gray px-6 py-2 rounded-2xl font-wRegular text-base flex-1 mr-2"
           )}
-          placeholder="Enter website address..."
+          placeholder="Enter website ..."
           placeholderTextColor={tw("text-dark-500").color}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          onPointerLeave={() => setFocused(false)}
+          onPressOut={() => !!focused && setFocused(false)}
         />
         <ButtonBoss
           icon={
@@ -45,7 +54,7 @@ const ButtonBoss = ({ icon, title, onPress, containerStyle }) => {
         {!title ? (
           icon
         ) : (
-          <Text style={tw("font-wRegular text-lg text-white")}>{title}</Text>
+          <Text style={tw("font-wRegular text-base text-white")}>{title}</Text>
         )}
       </View>
     </TouchableOpacity>
