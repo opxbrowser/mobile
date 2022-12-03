@@ -181,6 +181,12 @@
 			"paddingBottom": 8
 		}
 	},
+	"py-2.5": {
+		"style": {
+			"paddingTop": 10,
+			"paddingBottom": 10
+		}
+	},
 	"text-center": {
 		"style": {
 			"textAlign": "center"
