@@ -45,12 +45,6 @@ const OptionsBox = forwardRef((props, ref) => {
           opacity: containerAnimation,
           bottom: 90,
           elevation: 10,
-          shadowOffset: {
-            height: 2,
-            width: 2,
-          },
-          shadowOpacity: 0.1,
-          shadowRadius: 5,
           transform: [
             {
               translateY: containerAnimation.interpolate({
