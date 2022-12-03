@@ -1,3 +1,17 @@
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem
+}
+
+.mx-12 {
+  margin-left: 3rem;
+  margin-right: 3rem
+}
+
+.mt-4 {
+  margin-top: 1rem
+}
+
 .flex-1 {
   flex: 1 1 0%
 }
@@ -15,6 +29,10 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.text-center {
+  text-align: center
+}
+
 .font-wRegular {
   font-family: WorkSans_400Regular
 }
@@ -29,7 +47,27 @@
   line-height: 2.25rem
 }
 
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
 .text-primary {
   --tw-text-opacity: 1;
   color: rgb(138 79 255 / var(--tw-text-opacity))
+}
+
+.text-primary-400 {
+  --tw-text-opacity: 1;
+  color: rgb(195 190 247 / var(--tw-text-opacity))
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
