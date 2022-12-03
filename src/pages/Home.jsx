@@ -47,6 +47,7 @@ const Home = () => {
   }, []);
 
   const handleSearchAddress = () => {
+    Keyboard.dismiss();
     setLoading(true);
     let newSearchAddress = searchAddress;
 
@@ -69,31 +70,31 @@ const Home = () => {
 
   return (
     <SafeAreaView style={tw("flex-1 bg-white")}>
-      <LoadingBar value={progressValue} loading={loading} />
-      <KeyboardAvoidingView
-        style={tw("flex-1 bg-white")}
-        behavior={!isAndroid() ? "padding" : "height"}
-      >
-        {!lastSearch && <EmptyState />}
-        <OptionsBox ref={refBoxOptions} />
-        {lastSearch && (
-          <WebView
-            style={tw("flex-1")}
-            source={{ uri: lastSearch }}
-            cacheEnabled
-            cacheMode="LOAD_CACHE_ONLY"
-            onLoadProgress={(e) => setProgressValue(e.nativeEvent.progress)}
-            onLoadEnd={() => loadFinished()}
+      <View style={tw("flex-1 bg-white")}>
+        <KeyboardAvoidingView
+          style={tw("flex-1 bg-white")}
+          behavior={!isAndroid() ? "padding" : "height"}
+        >
+          {!lastSearch && <EmptyState />}
+          <OptionsBox ref={refBoxOptions} />
+          {lastSearch && (
+            <WebView
+              style={tw("flex-1")}
+              source={{ uri: lastSearch }}
+              onLoadProgress={(e) => setProgressValue(e.nativeEvent.progress)}
+              onLoadEnd={() => loadFinished()}
+            />
+          )}
+          <LoadingBar value={progressValue} loading={loading} />
+          <InputBoss
+            value={searchAddress}
+            optionsRef={refBoxOptions}
+            onChangeText={(text) => setSearchAddress(text)}
+            pressOnSearch={handleSearchAddress}
+            hideOptions={hideOptions}
           />
-        )}
-        <InputBoss
-          value={searchAddress}
-          optionsRef={refBoxOptions}
-          onChangeText={(text) => setSearchAddress(text)}
-          pressOnSearch={handleSearchAddress}
-          hideOptions={hideOptions}
-        />
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </View>
     </SafeAreaView>
   );
 };
