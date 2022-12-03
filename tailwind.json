@@ -6,9 +6,37 @@
 			"flexBasis": "0%"
 		}
 	},
+	"items-center": {
+		"style": {
+			"alignItems": "center"
+		}
+	},
 	"justify-center": {
 		"style": {
 			"justifyContent": "center"
+		}
+	},
+	"font-wRegular": {
+		"style": {
+			"fontFamily": "WorkSans_400Regular"
+		}
+	},
+	"text-xl": {
+		"style": {
+			"fontSize": 20,
+			"lineHeight": 28
+		}
+	},
+	"text-3xl": {
+		"style": {
+			"fontSize": 30,
+			"lineHeight": 36
+		}
+	},
+	"text-primary": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(138 79 255 / var(--tw-text-opacity))"
 		}
 	}
 }

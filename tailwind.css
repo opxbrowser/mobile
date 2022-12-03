@@ -2,6 +2,29 @@
   flex: 1 1 0%
 }
 
+.items-center {
+  align-items: center
+}
+
 .justify-center {
   justify-content: center
+}
+
+.font-wRegular {
+  font-family: WorkSans_400Regular
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
+.text-primary {
+  --tw-text-opacity: 1;
+  color: rgb(138 79 255 / var(--tw-text-opacity))
 }
