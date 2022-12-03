@@ -73,6 +73,10 @@
   height: 1.5rem
 }
 
+.h-1 {
+  height: 0.25rem
+}
+
 .w-full {
   width: 100%
 }

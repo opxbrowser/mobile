@@ -16,6 +16,8 @@ import { useTailwind } from "tailwind-rn";
 import OptionsBox from "../components/OptionsBox";
 import EmptyState from "../components/EmptyState";
 import InputBoss from "../components/InputBoss";
+import LoadingBar from "../components/LoadingBar";
+
 import isAndroid from "../utils/isAndroid";
 
 const Home = () => {
@@ -27,15 +29,17 @@ const Home = () => {
 
   const [searchAddress, setSearchAddress] = useState("");
   const [hideOptions, setHideOptions] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [progressValue, setProgressValue] = useState(0);
 
   useEffect(() => {
     let keyboard = [];
 
-    keyboard[0] = Keyboard.addListener("keyboardDidShow", () => {
+    keyboard[0] = Keyboard.addListener("keyboardWillShow", () => {
       setHideOptions(true);
     });
 
-    keyboard[1] = Keyboard.addListener("keyboardDidHide", () => {
+    keyboard[1] = Keyboard.addListener("keyboardWillHide", () => {
       setHideOptions(false);
     });
 
@@ -43,6 +47,7 @@ const Home = () => {
   }, []);
 
   const handleSearchAddress = () => {
+    setLoading(true);
     let newSearchAddress = searchAddress;
 
     if (
@@ -55,8 +60,16 @@ const Home = () => {
     dispatch(setLastSearch(newSearchAddress));
   };
 
+  const loadFinished = () => {
+    setTimeout(() => {
+      setLoading(false);
+      setProgressValue(0);
+    }, 1000);
+  };
+
   return (
     <SafeAreaView style={tw("flex-1 bg-white")}>
+      <LoadingBar value={progressValue} loading={loading} />
       <KeyboardAvoidingView
         style={tw("flex-1 bg-white")}
         behavior={!isAndroid() ? "padding" : "height"}
@@ -64,7 +77,14 @@ const Home = () => {
         {!lastSearch && <EmptyState />}
         <OptionsBox ref={refBoxOptions} />
         {lastSearch && (
-          <WebView style={tw("flex-1")} source={{ uri: lastSearch }} />
+          <WebView
+            style={tw("flex-1")}
+            source={{ uri: lastSearch }}
+            cacheEnabled
+            cacheMode="LOAD_CACHE_ONLY"
+            onLoadProgress={(e) => setProgressValue(e.nativeEvent.progress)}
+            onLoadEnd={() => loadFinished()}
+          />
         )}
         <InputBoss
           value={searchAddress}

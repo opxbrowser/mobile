@@ -26,7 +26,8 @@
     "redux": "^4.2.0",
     "tailwind-rn": "^4.2.0",
     "lottie-react-native": "5.1.4",
-    "react-native-webview": "11.23.1"
+    "react-native-webview": "11.23.1",
+    "expo-linear-gradient": "~12.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

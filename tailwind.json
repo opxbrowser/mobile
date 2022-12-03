@@ -98,6 +98,11 @@
 			"height": 24
 		}
 	},
+	"h-1": {
+		"style": {
+			"height": 4
+		}
+	},
 	"w-full": {
 		"style": {
 			"width": "100%"
