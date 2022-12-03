@@ -42,6 +42,9 @@ const navigationSlice = createSlice({
         (item) => item.id != action.payload.id
       );
     },
+    clearReferences(state, _) {
+      state.references = [];
+    },
   },
 });
 
@@ -51,5 +54,6 @@ export const {
   clearHistoric,
   addNewReferences,
   removeReferences,
+  clearReferences,
 } = navigationSlice.actions;
 export default navigationSlice.reducer;
