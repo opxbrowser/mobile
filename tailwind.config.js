@@ -7,11 +7,9 @@ module.exports = {
           DEFAULT: "#8A4FFF",
           400: "#C3BEF7",
         },
-        black: {
-          DEFAULT: "#070600",
-        },
         dark: {
-          DEFAULT: "#B5B4C2",
+          DEFAULT: "#070600",
+          400: "#B5B4C2",
           500: "#505050",
         },
         gray: {
