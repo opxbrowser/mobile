@@ -10,6 +10,11 @@
   justify-content: center
 }
 
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
 .font-wRegular {
   font-family: WorkSans_400Regular
 }

@@ -3,10 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const navigationSlice = createSlice({
   name: "navigation",
   initialState: {
+    lastSearch: null,
     references: [],
     historic: [],
   },
   reducers: {
+    setLastSearch(state, action) {
+      state.lastSearch = action.payload;
+    },
     addNewHistoric(state, action) {
       state.historic.push(...action.paylaod);
     },
@@ -30,6 +34,7 @@ const navigationSlice = createSlice({
 });
 
 export const {
+  setLastSearch,
   addNewHistoric,
   removeHistoric,
   clearHistoric,

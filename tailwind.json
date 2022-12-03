@@ -16,6 +16,12 @@
 			"justifyContent": "center"
 		}
 	},
+	"bg-white": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(255 255 255 / var(--tw-bg-opacity))"
+		}
+	},
 	"font-wRegular": {
 		"style": {
 			"fontFamily": "WorkSans_400Regular"

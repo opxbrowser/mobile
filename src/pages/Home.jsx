@@ -1,15 +1,18 @@
 import React from "react";
 import { View, Text } from "react-native";
 
+import { useSelector } from "react-redux";
 import { useTailwind } from "tailwind-rn";
+
+import EmptyState from "../components/EmptyState";
 
 const Home = () => {
   const tw = useTailwind();
-  return (
-    <View style={tw("flex-1 justify-center items-center")}>
-      <Text style={tw("text-3xl font-wRegular text-primary")}>Ola</Text>
-    </View>
-  );
+  const lastSearch = useSelector((state) => state.navigation.lastSearch);
+
+  if (!lastSearch) return EmptyState;
+
+  return <View style={tw("flex-1 bg-white")}></View>;
 };
 
 export default Home;
