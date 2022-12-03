@@ -10,9 +10,18 @@ const navigationSlice = createSlice({
   reducers: {
     setLastSearch(state, action) {
       state.lastSearch = action.payload;
-    },
-    addNewHistoric(state, action) {
-      state.historic.push(...action.paylaod);
+
+      let lastItem =
+        state.historic[
+          state.historic.length > 0 ? state.historic.length - 1 : 0
+        ];
+      if (lastItem?.url != action.payload) {
+        state.historic.push({
+          id: state.historic.length + 1,
+          url: action.payload,
+          timestamp: new Date().valueOf(),
+        });
+      }
     },
     removeHistoric(state, action) {
       state.historic = state.historic.filter(
@@ -38,7 +47,6 @@ const navigationSlice = createSlice({
 
 export const {
   setLastSearch,
-  addNewHistoric,
   removeHistoric,
   clearHistoric,
   addNewReferences,
