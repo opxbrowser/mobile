@@ -31,6 +31,8 @@ const InputBoss = ({ pressOnSearch, ...rest }) => {
           autoCapitalize={"none"}
           autoCorrect={false}
           blurOnSubmit
+          textContentType="URL"
+          keyboardType="url"
         />
 
         <ButtonBoss

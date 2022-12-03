@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, SafeAreaView } from "react-native";
+import { View, SafeAreaView, KeyboardAvoidingView } from "react-native";
 
 import { WebView } from "react-native-webview";
 
@@ -9,6 +9,7 @@ import { useTailwind } from "tailwind-rn";
 
 import EmptyState from "../components/EmptyState";
 import InputBoss from "../components/InputBoss";
+import isAndroid from "../utils/isAndroid";
 
 const Home = () => {
   const tw = useTailwind();
@@ -17,12 +18,6 @@ const Home = () => {
   const lastSearch = useSelector((state) => state.navigation.lastSearch);
 
   const [searchAddress, setSearchAddress] = useState("");
-
-  useEffect(() => {
-    if (!!lastSearch) {
-      setSearchAddress(lastSearch);
-    }
-  }, [lastSearch]);
 
   const handleSearchAddress = () => {
     let newSearchAddress = searchAddress;
@@ -34,24 +29,26 @@ const Home = () => {
       newSearchAddress = `https://${newSearchAddress}`;
     }
 
-    console.log(newSearchAddress);
-
+    setSearchAddress(newSearchAddress);
     dispatch(setLastSearch(newSearchAddress));
   };
 
   return (
     <SafeAreaView style={tw("flex-1 bg-white")}>
-      <View style={tw("flex-1 bg-white")}>
+      <KeyboardAvoidingView
+        style={tw("flex-1 bg-white")}
+        behavior={!isAndroid() ? "padding" : "height"}
+      >
         {!lastSearch && <EmptyState />}
         {lastSearch && (
-          <WebView style={tw("flex-1")} source={{ uri: searchAddress }} />
+          <WebView style={tw("flex-1")} source={{ uri: lastSearch }} />
         )}
         <InputBoss
           value={searchAddress}
           onChangeText={(text) => setSearchAddress(text)}
           pressOnSearch={handleSearchAddress}
         />
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
