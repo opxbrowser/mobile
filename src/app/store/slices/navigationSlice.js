@@ -6,10 +6,17 @@ const navigationSlice = createSlice({
     lastSearch: null,
     references: [],
     historic: [],
+    isSavedInReference: false,
   },
   reducers: {
     setLastSearch(state, action) {
       state.lastSearch = action.payload;
+
+      if (state.references.includes(action.payload)) {
+        state.isSavedInReference = true;
+      } else if (!!state.isSavedInReference) {
+        state.isSavedInReference = false;
+      }
     },
     addNewHistoric(state, action) {
       state.historic.push(...action.paylaod);
