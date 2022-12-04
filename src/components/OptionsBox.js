@@ -79,7 +79,7 @@ const OptionsBox = forwardRef((props, ref) => {
         title={
           !!isReferenceSaved ? "Saved in your references" : "Save as reference"
         }
-        disabled={isReferenceSaved}
+        disabled={isReferenceSaved || !lastSearch}
         onPress={() => dispatch(addNewReferences())}
       />
       <OptionItem
@@ -121,7 +121,11 @@ const OptionItem = ({ onPress, icon, title, disabled = false }) => {
 
   return (
     <TouchableOpacity onPress={onPress} disabled={disabled}>
-      <View style={tw("justify-center items-center")}>
+      <View
+        style={tw(
+          `justify-center items-center ${!!disabled ? "opacity-50" : ""}`
+        )}
+      >
         <View
           style={tw(
             "bg-primary-400 rounded-xl w-14 h-10 rounded-xl justify-center items-center"
