@@ -80,6 +80,7 @@ const OptionsBox = forwardRef((props, ref) => {
         title={
           !!isReferenceSaved ? "Saved in your references" : "Save as reference"
         }
+        isReferenceSaved={isReferenceSaved}
         disabled={isReferenceSaved || !lastSearch}
         onPress={() => dispatch(addNewReferences())}
       />
@@ -118,14 +119,22 @@ const OptionsBox = forwardRef((props, ref) => {
   );
 });
 
-export const OptionItem = ({ onPress, icon, title, disabled = false }) => {
+export const OptionItem = ({
+  onPress,
+  icon,
+  title,
+  disabled = false,
+  isReferenceSaved,
+}) => {
   const tw = useTailwind();
 
   return (
     <TouchableOpacity onPress={onPress} disabled={disabled}>
       <View
         style={tw(
-          `justify-center items-center ${!!disabled ? "opacity-50" : ""}`
+          `justify-center items-center ${
+            !!disabled && !isReferenceSaved ? "opacity-50" : ""
+          }`
         )}
       >
         {!!icon && (
