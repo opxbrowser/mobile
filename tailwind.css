@@ -32,6 +32,11 @@
   margin-right: 1rem
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem
+}
+
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem
@@ -40,11 +45,6 @@
 .my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem
-}
-
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem
 }
 
 .mt-4 {
@@ -83,16 +83,16 @@
   margin-top: 0.25rem
 }
 
+.mb-4 {
+  margin-bottom: 1rem
+}
+
 .mt-28 {
   margin-top: 7rem
 }
 
 .mb-6 {
   margin-bottom: 1.5rem
-}
-
-.mb-4 {
-  margin-bottom: 1rem
 }
 
 .h-1 {
@@ -115,18 +115,6 @@
   width: 5rem
 }
 
-.w-52 {
-  width: 13rem
-}
-
-.w-48 {
-  width: 12rem
-}
-
-.w-56 {
-  width: 14rem
-}
-
 .w-60 {
   width: 15rem
 }
@@ -135,8 +123,20 @@
   flex: 1 1 0%
 }
 
+.shrink {
+  flex-shrink: 1
+}
+
+.grow {
+  flex-grow: 1
+}
+
 .flex-row {
   flex-direction: row
+}
+
+.flex-wrap {
+  flex-wrap: wrap
 }
 
 .items-start {
@@ -264,12 +264,12 @@
   font-family: WorkSans_400Regular
 }
 
-.font-sLight {
-  font-family: Sansation_Light
-}
-
 .font-wSemibold {
   font-family: WorkSans_600SemiBold
+}
+
+.font-sLight {
+  font-family: Sansation_Light
 }
 
 .text-lg {
@@ -335,11 +335,6 @@
 .text-gray {
   --tw-text-opacity: 1;
   color: rgb(245 245 245 / var(--tw-text-opacity))
-}
-
-.text-primary-200 {
-  --tw-text-opacity: 1;
-  color: rgb(247 246 255 / var(--tw-text-opacity))
 }
 
 .underline {

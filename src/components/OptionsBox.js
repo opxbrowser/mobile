@@ -7,6 +7,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 
+import * as Sharing from "expo-sharing";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { useTailwind } from "tailwind-rn/dist";
@@ -17,7 +18,10 @@ import { addNewReferences } from "../app/store/slices/navigationSlice";
 const OptionsBox = forwardRef((props, ref) => {
   const navigation = useNavigation();
   const tw = useTailwind();
-  const { references, lastSearch } = useSelector((state) => state.navigation);
+  const { references, lastSearch, lastSearchData } = useSelector(
+    (state) => state.navigation
+  );
+
   const dispatch = useDispatch();
 
   const { height } = useWindowDimensions();
@@ -78,7 +82,7 @@ const OptionsBox = forwardRef((props, ref) => {
           Options
         </Text>
       </View>
-      <View style={tw("flex-row justify-between items-start")}>
+      <View style={tw("flex-row justify-between items-start flex-wrap")}>
         <OptionItem
           icon={
             <>
@@ -136,6 +140,24 @@ const OptionsBox = forwardRef((props, ref) => {
         <OptionItem
           icon={
             <MaterialCommunityIcons
+              name="share-variant-outline"
+              size={22}
+              color={tw("text-primary").color}
+            />
+          }
+          onPress={() =>
+            !!lastSearch
+              ? Sharing.shareAsync(lastSearch, {
+                  dialogTitle: lastSearchData?.title,
+                })
+              : null
+          }
+          title="Share"
+          disabled={!lastSearch}
+        />
+        <OptionItem
+          icon={
+            <MaterialCommunityIcons
               name="dots-horizontal"
               size={22}
               color={tw("text-white").color}
@@ -143,6 +165,7 @@ const OptionsBox = forwardRef((props, ref) => {
           }
           title="More"
           onPress={() => navigation.navigate("About")}
+          containerStyle={tw("mt-4")}
         />
       </View>
     </Animated.View>
@@ -155,17 +178,21 @@ export const OptionItem = ({
   title,
   disabled = false,
   isReferenceSaved,
+  containerStyle,
 }) => {
   const tw = useTailwind();
 
   return (
     <TouchableOpacity onPress={onPress} disabled={disabled}>
       <View
-        style={tw(
-          `justify-center items-center ${
-            !!disabled && !isReferenceSaved ? "opacity-50" : ""
-          }`
-        )}
+        style={[
+          tw(
+            `justify-center items-center ${
+              !!disabled && !isReferenceSaved ? "opacity-50" : ""
+            }`
+          ),
+          containerStyle,
+        ]}
       >
         {!!icon && (
           <View

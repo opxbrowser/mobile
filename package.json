@@ -34,7 +34,8 @@
     "redux": "^4.2.0",
     "tailwind-rn": "^4.2.0",
     "expo-constants": "~14.0.2",
-    "expo-updates": "~0.15.6"
+    "expo-updates": "~0.15.6",
+    "expo-sharing": "~11.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
