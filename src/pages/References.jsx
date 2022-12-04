@@ -26,7 +26,6 @@ import {
   setLastSearch,
 } from "../app/store/slices/navigationSlice";
 import { InputItem } from "../components/InputBoss";
-import { REGEX_TITLE } from "../utils/regex";
 
 const References = () => {
   const navigation = useNavigation();
@@ -37,6 +36,7 @@ const References = () => {
 
   const animation = useRef(new Animated.Value(0)).current;
 
+  const [loadingAddress, setLoadingAddress] = useState(false);
   const [searchAddress, setSearchAddress] = useState("");
   const [showInput, setShowInput] = useState(false);
 
@@ -110,6 +110,7 @@ const References = () => {
 
   const handleSaveNewReference = async () => {
     try {
+      setLoadingAddress(true);
       let newSearchAddress = searchAddress;
 
       if (!newSearchAddress.includes("https://")) {
@@ -124,10 +125,10 @@ const References = () => {
           ...data,
         })
       );
+    } finally {
+      setLoadingAddress(false);
       setSearchAddress("");
       setShowInput(false);
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -139,6 +140,7 @@ const References = () => {
             title="Your References"
             referencesHeader
             newReferenceNow={showInput}
+            loadingAddress={loadingAddress}
             addNewReference={() => setShowInput(true)}
             saveNewRerence={() => handleSaveNewReference()}
             deleteMode={deleteMode}
@@ -171,15 +173,18 @@ const References = () => {
                 value={searchAddress}
                 onChangeText={(text) => setSearchAddress(text)}
                 autoFocus
+                editable={!loadingAddress}
               />
-              <TouchableOpacity onPress={() => setShowInput(false)}>
-                <MaterialCommunityIcons
-                  name="close"
-                  color={tw("text-dark-400").color}
-                  size={20}
-                  style={tw("mr-1")}
-                />
-              </TouchableOpacity>
+              {!loadingAddress && (
+                <TouchableOpacity onPress={() => setShowInput(false)}>
+                  <MaterialCommunityIcons
+                    name="close"
+                    color={tw("text-dark-400").color}
+                    size={20}
+                    style={tw("mr-1")}
+                  />
+                </TouchableOpacity>
+              )}
             </Animated.View>
           )}
           <FlatList

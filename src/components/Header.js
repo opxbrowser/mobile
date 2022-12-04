@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
@@ -11,6 +11,7 @@ const Header = ({
   newReferenceNow,
   addNewReference,
   saveNewRerence,
+  loadingAddress,
   deleteFullEnabled,
   onDeleteFull,
   deleteMode,
@@ -59,16 +60,22 @@ const Header = ({
                     +
                   </Text>
                 </TouchableOpacity>
+              ) : newReferenceNow && !loadingAddress ? (
+                <TouchableOpacity onPress={() => saveNewRerence()}>
+                  <MaterialCommunityIcons
+                    name="check"
+                    size={25}
+                    color={tw("text-primary").color}
+                    style={tw("mr-1")}
+                  />
+                </TouchableOpacity>
               ) : (
-                newReferenceNow && (
-                  <TouchableOpacity onPress={() => saveNewRerence()}>
-                    <MaterialCommunityIcons
-                      name="check"
-                      size={25}
-                      color={tw("text-primary").color}
-                      style={tw("mr-1")}
-                    />
-                  </TouchableOpacity>
+                newReferenceNow &&
+                loadingAddress && (
+                  <ActivityIndicator
+                    size="small"
+                    color={tw("text-primary").color}
+                  />
                 )
               )}
             </View>
