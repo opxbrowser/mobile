@@ -147,8 +147,9 @@ const OptionsBox = forwardRef((props, ref) => {
           }
           onPress={() =>
             !!lastSearch
-              ? Share.share(lastSearch, {
-                  dialogTitle: lastSearchData?.title ?? "",
+              ? Share.share({
+                  title: lastSearchData?.title ?? "",
+                  url: lastSearch,
                 })
               : null
           }
