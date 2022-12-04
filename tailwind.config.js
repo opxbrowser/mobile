@@ -26,6 +26,7 @@ module.exports = {
         wMedium: "WorkSans_500Medium",
         wSemibold: "WorkSans_600SemiBold",
         wBold: "WorkSans_700Bold",
+        sLight: "Sansation_Light",
       },
     },
   },

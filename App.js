@@ -14,6 +14,8 @@ import {
   WorkSans_700Bold,
 } from "@expo-google-fonts/work-sans";
 
+import Sansation_Light from "./src/assets/fonts/Sansation_Light.ttf";
+
 import Routes from "./src/routes/index.routes";
 
 import store from "./src/app/store";
@@ -26,6 +28,7 @@ export default function App() {
     WorkSans_500Medium,
     WorkSans_600SemiBold,
     WorkSans_700Bold,
+    Sansation_Light,
   });
 
   if (!fontsLoaded) return null;
