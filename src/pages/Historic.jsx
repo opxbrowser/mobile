@@ -22,7 +22,8 @@ const Historic = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectMode, setSelectModal] = useState(false);
 
-  const [deleteMode, setDeleteModal] = useState(false);
+  const [deletedItems, setDeletedtems] = useState([]);
+  const [deleteMode, setDeleteMode] = useState(false);
 
   const handleSearchAddress = (searchAddress) => {
     Keyboard.dismiss();
@@ -36,25 +37,29 @@ const Historic = () => {
     navigation.goBack();
   };
 
-  const handleSelectItem = useCallback(
+  const handleDeleteItem = useCallback(
     (id) => {
-      if (!selectMode) setSelectModal(true);
+      if (!deleteMode) setDeleteMode(true);
 
-      if (!!selectedItems.find((item) => item == id)) {
-        let newList = selectedItems.filter((item) => item != id);
+      if (!!deletedItems.find((item) => item == id)) {
+        let newList = deletedItems.filter((item) => item != id);
         if (newList.length > 0) {
-          setSelectedItems(newList);
+          setDeletedtems(newList);
         } else {
-          setSelectModal(false);
-          setSelectedItems([]);
+          setDeleteMode(false);
+          setDeletedtems([]);
         }
         return;
       }
 
-      setSelectedItems([...selectedItems, id]);
+      setDeletedtems([...deletedItems, id]);
     },
-    [selectedItems, selectMode]
+    [deletedItems, deleteMode]
   );
+
+  const handleDeleteItemsSelected = useCallback(() => {
+    console.log(deletedItems);
+  }, [deletedItems]);
 
   return (
     <SafeAreaView style={tw("flex-1 bg-white")}>
@@ -62,14 +67,14 @@ const Historic = () => {
         <Header
           title="Historic"
           deleteMode={deleteMode}
-          selectMode={selectMode}
-          setSelectMode={(value) => {
-            setSelectModal(value);
-            setSelectedItems([]);
+          onPressDelete={handleDeleteItemsSelected}
+          setDeleteMode={(value) => {
+            setDeleteMode(value);
+            setDeletedtems([]);
           }}
           selectData={{
             totalItems: historic.length,
-            totalSelected: selectedItems.length,
+            totalSelected: deletedItems.length,
           }}
         />
         <FlatList
@@ -79,14 +84,14 @@ const Historic = () => {
               title={item.url}
               description={getTextTime(item.timestamp)}
               onPress={() =>
-                selectMode
-                  ? handleSelectItem(item.id)
+                deleteMode
+                  ? handleDeleteItem(item.id)
                   : handleSearchAddress(item.url)
               }
               selected={
-                !!selectedItems.find((selectItem) => selectItem == item.id)
+                !!deletedItems.find((selectItem) => selectItem == item.id)
               }
-              onSelect={() => handleSelectItem(item.id)}
+              onSelect={() => handleDeleteItem(item.id)}
             />
           )}
           ListHeaderComponent={<ListHeader total={historic.length} />}

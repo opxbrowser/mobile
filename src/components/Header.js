@@ -8,6 +8,7 @@ import { TabRouter, useNavigation } from "@react-navigation/native";
 const Header = ({
   title,
   deleteMode,
+  onPressDelete,
   setDeleteMode,
   selectMode,
   setSelectMode,
@@ -23,7 +24,7 @@ const Header = ({
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <MaterialCommunityIcons name="chevron-left" size={25} />
           </TouchableOpacity>
-          {!selectMode ? (
+          {!selectMode && !deleteMode ? (
             <Text style={tw("font-wMedium text-xl ml-4")}>{title}</Text>
           ) : (
             <Text style={tw("font-wMedium text-xl ml-4")}>
@@ -31,7 +32,7 @@ const Header = ({
             </Text>
           )}
         </View>
-        {!selectMode ? (
+        {!deleteMode ? (
           <View>
             <TouchableOpacity onPress={() => setDeleteMode(TabRouter)}>
               <MaterialCommunityIcons
@@ -43,14 +44,14 @@ const Header = ({
           </View>
         ) : (
           <View style={tw("flex-row items-center")}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onPressDelete}>
               <View style={tw("bg-primary-200 px-8 py-1 rounded-full")}>
                 <Text style={tw("font-wRegular text-sm text-primary")}>
                   Excluir
                 </Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setSelectMode(false)}>
+            <TouchableOpacity onPress={() => setDeleteMode(false)}>
               <MaterialCommunityIcons
                 name="close"
                 size={20}
