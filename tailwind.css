@@ -86,6 +86,10 @@
   margin-bottom: 1.5rem
 }
 
+.mb-4 {
+  margin-bottom: 1rem
+}
+
 .h-1 {
   height: 0.25rem
 }
@@ -259,6 +263,10 @@
   font-family: Sansation_Light
 }
 
+.font-wSemibold {
+  font-family: WorkSans_600SemiBold
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem
@@ -322,6 +330,11 @@
 .text-gray {
   --tw-text-opacity: 1;
   color: rgb(245 245 245 / var(--tw-text-opacity))
+}
+
+.text-primary-200 {
+  --tw-text-opacity: 1;
+  color: rgb(247 246 255 / var(--tw-text-opacity))
 }
 
 .underline {

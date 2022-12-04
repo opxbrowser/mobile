@@ -110,6 +110,11 @@
 			"marginBottom": 24
 		}
 	},
+	"mb-4": {
+		"style": {
+			"marginBottom": 16
+		}
+	},
 	"h-1": {
 		"style": {
 			"height": 4
@@ -343,6 +348,11 @@
 			"fontFamily": "Sansation_Light"
 		}
 	},
+	"font-wSemibold": {
+		"style": {
+			"fontFamily": "WorkSans_600SemiBold"
+		}
+	},
 	"text-lg": {
 		"style": {
 			"fontSize": 18,
@@ -419,6 +429,12 @@
 		"style": {
 			"--tw-text-opacity": 1,
 			"color": "rgb(245 245 245 / var(--tw-text-opacity))"
+		}
+	},
+	"text-primary-200": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(247 246 255 / var(--tw-text-opacity))"
 		}
 	},
 	"underline": {

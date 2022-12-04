@@ -52,7 +52,7 @@ const OptionsBox = forwardRef((props, ref) => {
   return (
     <Animated.View
       style={[
-        tw("bg-gray absolute mx-4 rounded-xl p-4 flex-row self-center"),
+        tw("bg-gray absolute mx-4 rounded-xl p-4"),
         {
           zIndex: 1,
           opacity: containerAnimation,
@@ -69,69 +69,83 @@ const OptionsBox = forwardRef((props, ref) => {
         },
       ]}
     >
-      <OptionItem
-        icon={
-          <>
+      <View style={tw("flex-row items-center mb-4")}>
+        <MaterialCommunityIcons
+          name={"cog"}
+          size={30}
+          color={tw("text-primary-400").color}
+        />
+        <Text style={tw("text-xl font-wSemibold ml-4 text-dark-500")}>
+          Options
+        </Text>
+      </View>
+      <View style={tw("flex-row self-center")}>
+        <OptionItem
+          icon={
+            <>
+              <MaterialCommunityIcons
+                name={!!isReferenceSaved ? "check-decagram" : "attachment"}
+                size={22}
+                color={tw("text-primary").color}
+              />
+              {!isReferenceSaved && (
+                <Text
+                  style={[
+                    tw("font-wMedium text-primary text-xl absolute"),
+                    {
+                      top: -5,
+                      right: 10,
+                    },
+                  ]}
+                >
+                  +
+                </Text>
+              )}
+            </>
+          }
+          title={
+            !!isReferenceSaved
+              ? "Saved in your references"
+              : "Save as reference"
+          }
+          isReferenceSaved={isReferenceSaved}
+          disabled={isReferenceSaved || !lastSearch}
+          onPress={() => dispatch(addNewReferences())}
+        />
+        <OptionItem
+          icon={
             <MaterialCommunityIcons
-              name={!!isReferenceSaved ? "check-decagram" : "attachment"}
+              name="clock-outline"
               size={22}
               color={tw("text-primary").color}
             />
-            {!isReferenceSaved && (
-              <Text
-                style={[
-                  tw("font-wMedium text-primary text-xl absolute"),
-                  {
-                    top: -5,
-                    right: 10,
-                  },
-                ]}
-              >
-                +
-              </Text>
-            )}
-          </>
-        }
-        title={
-          !!isReferenceSaved ? "Saved in your references" : "Save as reference"
-        }
-        isReferenceSaved={isReferenceSaved}
-        disabled={isReferenceSaved || !lastSearch}
-        onPress={() => dispatch(addNewReferences())}
-      />
-      <OptionItem
-        icon={
-          <MaterialCommunityIcons
-            name="clock-outline"
-            size={22}
-            color={tw("text-primary").color}
-          />
-        }
-        title="Historic"
-        onPress={() => navigation.navigate("Historic")}
-      />
-      <OptionItem
-        icon={
-          <MaterialCommunityIcons
-            name="attachment"
-            size={22}
-            color={tw("text-primary").color}
-          />
-        }
-        onPress={() => navigation.navigate("References")}
-        title="References"
-      />
-      <OptionItem
-        icon={
-          <MaterialCommunityIcons
-            name="dots-horizontal"
-            size={22}
-            color={tw("text-white").color}
-          />
-        }
-        title="More"
-        onPress={() => navigation.navigate("About")}
-      />
+          }
+          title="Historic"
+          onPress={() => navigation.navigate("Historic")}
+        />
+        <OptionItem
+          icon={
+            <MaterialCommunityIcons
+              name="attachment"
+              size={22}
+              color={tw("text-primary").color}
+            />
+          }
+          onPress={() => navigation.navigate("References")}
+          title="References"
+        />
+        <OptionItem
+          icon={
+            <MaterialCommunityIcons
+              name="dots-horizontal"
+              size={22}
+              color={tw("text-white").color}
+            />
+          }
+          title="More"
+          onPress={() => navigation.navigate("About")}
+        />
+      </View>
     </Animated.View>
   );
 });
