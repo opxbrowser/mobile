@@ -206,8 +206,9 @@ const References = () => {
             )}
             ItemSeparatorComponent={<View style={tw("my-1")} />}
             keyExtractor={(item) => String(item.id)}
-            contentContainerStyle={tw("mt-4")}
+            contentContainerStyle={tw("mt-4 flex-1")}
             showsVerticalScrollIndicator={false}
+            ListEmptyComponent={!showInput ? <EmptyState /> : null}
           />
         </View>
       </SafeAreaView>
@@ -221,5 +222,19 @@ const References = () => {
     </>
   );
 };
+
+function EmptyState() {
+  const tw = useTailwind();
+
+  return (
+    <View style={tw("flex-1 justify-center items-center mx-8")}>
+      <Text style={tw("text-base font-wRegular text-dark-400 text-center")}>
+        Here are all your saved references, where you can go back anytime and
+        see your study references, inspiration and more. Click on the icon and
+        add a site as a reference.
+      </Text>
+    </View>
+  );
+}
 
 export default References;

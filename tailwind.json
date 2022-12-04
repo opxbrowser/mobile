@@ -417,6 +417,12 @@
 			"color": "rgb(7 6 0 / var(--tw-text-opacity))"
 		}
 	},
+	"text-gray-400": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(156 163 175 / var(--tw-text-opacity))"
+		}
+	},
 	"underline": {
 		"style": {
 			"textDecorationLine": "underline"
