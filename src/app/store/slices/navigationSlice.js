@@ -10,6 +10,11 @@ const navigationSlice = createSlice({
   },
   reducers: {
     setLastSearch(state, action) {
+      if (action.payload === null) {
+        state.lastSearch = null;
+        return;
+      }
+
       state.lastSearch = action.payload;
 
       let lastItem =

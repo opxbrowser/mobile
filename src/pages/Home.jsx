@@ -51,6 +51,11 @@ const Home = () => {
   }, []);
 
   const handleSearchAddress = () => {
+    if (!searchAddress && lastSearch) {
+      dispatch(setLastSearch(null));
+      return;
+    }
+
     Keyboard.dismiss();
     setLoading(true);
     let newSearchAddress = searchAddress;
