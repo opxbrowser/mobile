@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { useTailwind } from "tailwind-rn/dist";
 
+import isAndroid from "../utils/isAndroid";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { addNewReferences } from "../app/store/slices/navigationSlice";
 
@@ -147,10 +148,17 @@ const OptionsBox = forwardRef((props, ref) => {
           }
           onPress={() =>
             !!lastSearch
-              ? Share.share({
-                  title: lastSearchData?.title ?? "",
-                  url: lastSearch,
-                })
+              ? Share.share(
+                  !isAndroid()
+                    ? {
+                        title: lastSearchData?.title ?? "",
+                        url: lastSearch,
+                      }
+                    : {
+                        title: lastSearchData?.title ?? "",
+                        message: lastSearch,
+                      }
+                )
               : null
           }
           title="Share"
