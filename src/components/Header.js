@@ -5,7 +5,13 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 import { TabRouter, useNavigation } from "@react-navigation/native";
 
-const Header = ({ title, deleteMode, setDeleteMode }) => {
+const Header = ({
+  title,
+  deleteMode,
+  setDeleteMode,
+  selectMode,
+  setSelectMode,
+}) => {
   const tw = useTailwind();
   const navigation = useNavigation();
 

@@ -4,7 +4,7 @@ import { useTailwind } from "tailwind-rn/dist";
 
 // import { Container } from './styles';
 
-const ListItem = ({ title, description, selected }) => {
+const ListItem = ({ title, description, selected, onPress }) => {
   const tw = useTailwind();
 
   const messageAnimation = useRef(new Animated.Value(1)).current;
@@ -31,6 +31,7 @@ const ListItem = ({ title, description, selected }) => {
     <TouchableWithoutFeedback
       onPressIn={() => animateMessageIn()}
       onPressOut={() => animateMessageOut()}
+      onPress={onPress}
     >
       <Animated.View
         style={[
