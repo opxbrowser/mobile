@@ -23,7 +23,7 @@ module.exports = {
       fontFamily: {
         wLight: "WorkSans_300Light",
         wRegular: "WorkSans_400Regular",
-        wMeidum: "WorkSans_500Medium",
+        wMedium: "WorkSans_500Medium",
         wSemibold: "WorkSans_600SemiBold",
         wBold: "WorkSans_700Bold",
       },

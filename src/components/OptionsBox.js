@@ -7,14 +7,15 @@ import {
   useWindowDimensions,
 } from "react-native";
 
+import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
-
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn/dist";
 
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { addNewReferences } from "../app/store/slices/navigationSlice";
 
 const OptionsBox = forwardRef((props, ref) => {
+  const navigation = useNavigation();
   const tw = useTailwind();
   const { references, lastSearch } = useSelector((state) => state.navigation);
   const dispatch = useDispatch();
@@ -91,6 +92,7 @@ const OptionsBox = forwardRef((props, ref) => {
           />
         }
         title="Historic"
+        onPress={() => navigation.navigate("Historic")}
       />
       <OptionItem
         icon={

@@ -32,6 +32,22 @@
   margin-top: 0.5rem
 }
 
+.ml-4 {
+  margin-left: 1rem
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem
+}
+
+.mt-8 {
+  margin-top: 2rem
+}
+
+.mt-6 {
+  margin-top: 1.5rem
+}
+
 .h-1 {
   height: 0.25rem
 }
@@ -66,6 +82,10 @@
 
 .justify-center {
   justify-content: center
+}
+
+.justify-between {
+  justify-content: space-between
 }
 
 .self-center {
@@ -103,6 +123,10 @@
 .bg-primary-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(195 190 247 / var(--tw-bg-opacity))
+}
+
+.p-4 {
+  padding: 1rem
 }
 
 .px-6 {
@@ -144,8 +168,16 @@
   text-align: center
 }
 
+.text-justify {
+  text-align: justify
+}
+
 .font-wRegular {
   font-family: WorkSans_400Regular
+}
+
+.font-wMedium {
+  font-family: WorkSans_500Medium
 }
 
 .text-lg {
@@ -161,6 +193,16 @@
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem
 }
 
 .text-primary-400 {
@@ -188,8 +230,18 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.opacity-20 {
-  opacity: 0.2
+.text-gray {
+  --tw-text-opacity: 1;
+  color: rgb(245 245 245 / var(--tw-text-opacity))
+}
+
+.text-dark-400 {
+  --tw-text-opacity: 1;
+  color: rgb(181 180 194 / var(--tw-text-opacity))
+}
+
+.underline {
+  text-decoration-line: underline
 }
 
 .opacity-50 {
