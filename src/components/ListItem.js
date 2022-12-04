@@ -59,8 +59,20 @@ const ListItem = ({ title, description, selected, onPress, onSelect }) => {
           },
         ]}
       >
-        <Text style={tw("font-wRegular text-base")}>{title}</Text>
-        <Text style={tw("font-wMedium mt-1 text-primary")}>{description}</Text>
+        <Text
+          style={tw(
+            `font-wRegular ${
+              description ? "text-dark" : "text-primary"
+            } text-base`
+          )}
+        >
+          {title}
+        </Text>
+        {!!description && (
+          <Text style={tw("font-wMedium mt-1 text-primary")}>
+            {description}
+          </Text>
+        )}
       </Animated.View>
     </TouchableWithoutFeedback>
   );

@@ -103,6 +103,7 @@ const OptionsBox = forwardRef((props, ref) => {
             color={tw("text-primary").color}
           />
         }
+        onPress={() => navigation.navigate("References")}
         title="References"
       />
       <OptionItem

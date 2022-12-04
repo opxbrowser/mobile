@@ -12,8 +12,6 @@ const Header = ({
   deleteMode,
   onPressDelete,
   setDeleteMode,
-  selectMode,
-  setSelectMode,
   selectData,
 }) => {
   const tw = useTailwind();
@@ -26,7 +24,7 @@ const Header = ({
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <MaterialCommunityIcons name="chevron-left" size={25} />
           </TouchableOpacity>
-          {!selectMode && !deleteMode ? (
+          {!deleteMode ? (
             <Text style={tw("font-wMedium text-xl ml-4")}>{title}</Text>
           ) : (
             <Text style={tw("font-wMedium text-xl ml-4")}>

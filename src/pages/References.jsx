@@ -10,19 +10,17 @@ import ListItem from "../components/ListItem";
 import ConfirmPopup from "../components/ConfirmPopup";
 
 import {
-  clearHistoric,
-  removeHistoric,
+  clearReferences,
+  removeReferences,
   setLastSearch,
 } from "../app/store/slices/navigationSlice";
 
-import { getTextTime } from "../utils/textDate";
-
-const Historic = () => {
+const References = () => {
   const navigation = useNavigation();
   const tw = useTailwind();
   const dispatch = useDispatch();
 
-  const historic = useSelector((state) => state.navigation.historic);
+  const references = useSelector((state) => state.navigation.references);
 
   const [deleteModal, setDeleteModal] = useState(false);
   const [deletedItems, setDeletedtems] = useState([]);
@@ -61,13 +59,13 @@ const Historic = () => {
   );
 
   const handleDeleteItemsSelected = () => {
-    dispatch(removeHistoric(deletedItems));
+    dispatch(removeReferences(deletedItems));
     setDeleteMode(false);
     setDeletedtems([]);
   };
 
   const handleDeleteFull = () => {
-    dispatch(clearHistoric());
+    dispatch(clearReferences());
     setDeleteMode(false);
     setDeletedtems([]);
     setDeleteModal(false);
@@ -78,26 +76,26 @@ const Historic = () => {
       <SafeAreaView style={tw("flex-1 bg-white")}>
         <View style={tw("flex-1 bg-white")}>
           <Header
-            title="Historic"
+            title="Your References"
             deleteMode={deleteMode}
             onPressDelete={handleDeleteItemsSelected}
             setDeleteMode={(value) => {
               setDeleteMode(value);
               setDeletedtems([]);
             }}
-            deleteFullEnabled={historic.length > 0}
+            deleteFullEnabled={references.length > 0}
             onDeleteFull={() => setDeleteModal(true)}
             selectData={{
-              totalItems: historic.length,
+              totalItems: references.length,
               totalSelected: deletedItems.length,
             }}
           />
           <FlatList
-            data={[...historic].reverse()}
+            data={[...references].reverse()}
             renderItem={({ item }) => (
               <ListItem
-                title={item.url}
-                description={getTextTime(item.timestamp)}
+                title={item.title}
+                description={item.url}
                 onPress={() =>
                   deleteMode
                     ? handleDeleteItem(item.id)
@@ -109,9 +107,9 @@ const Historic = () => {
                 onSelect={() => handleDeleteItem(item.id)}
               />
             )}
-            ListHeaderComponent={<ListHeader total={historic.length} />}
             ItemSeparatorComponent={<View style={tw("my-1")} />}
             keyExtractor={(item) => String(item.id)}
+            contentContainerStyle={tw("mt-4")}
             showsVerticalScrollIndicator={false}
           />
         </View>
@@ -120,30 +118,11 @@ const Historic = () => {
         visible={deleteModal}
         changeVisible={(value) => setDeleteModal(value)}
         onConfirmDelete={handleDeleteFull}
-        title="Clear Historic"
-        description="Here you will clear all your OPX history. This attitude has no turning back."
+        title="Clear References"
+        description="Here you will clear all your OPX references. This attitude has no turning back."
       />
     </>
   );
 };
 
-const ListHeader = ({ total = 0 }) => {
-  const tw = useTailwind();
-
-  return (
-    <View style={tw("mb-6")}>
-      <Text
-        style={tw("text-sm mx-4 font-wRegular text-dark-400 text-justify mt-4")}
-      >
-        Total {total} {total > 1 ? "addresses" : "address"} registered in your
-        device. Remembering that you can remove everything easily clicking on
-        the trash can or uninstalling the app.{" "}
-        <Text style={tw("underline")}>
-          Click and hold to remove some specific history.
-        </Text>
-      </Text>
-    </View>
-  );
-};
-
-export default Historic;
+export default References;

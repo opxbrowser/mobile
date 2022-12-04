@@ -9,7 +9,10 @@ import {
 
 import { WebView } from "react-native-webview";
 
-import { setLastSearch } from "../app/store/slices/navigationSlice";
+import {
+  setLastSearch,
+  setLastSearchData,
+} from "../app/store/slices/navigationSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useTailwind } from "tailwind-rn";
 
@@ -27,7 +30,9 @@ const Home = () => {
   const refBoxOptions = useRef(null);
   const lastSearch = useSelector((state) => state.navigation.lastSearch);
 
-  const [searchAddress, setSearchAddress] = useState("");
+  const [searchAddress, setSearchAddress] = useState("tapedin.com.br");
+  const [searchData, setSearchData] = useState({});
+
   const [hideOptions, setHideOptions] = useState(false);
   const [loading, setLoading] = useState(false);
   const [progressValue, setProgressValue] = useState(0);
@@ -82,7 +87,10 @@ const Home = () => {
               style={tw("flex-1")}
               source={{ uri: lastSearch }}
               onLoadProgress={(e) => setProgressValue(e.nativeEvent.progress)}
-              onLoadEnd={() => loadFinished()}
+              onLoadEnd={(e) => {
+                dispatch(setLastSearchData(e.nativeEvent));
+                loadFinished();
+              }}
             />
           )}
           <LoadingBar value={progressValue} loading={loading} />

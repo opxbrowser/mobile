@@ -4,6 +4,7 @@ const navigationSlice = createSlice({
   name: "navigation",
   initialState: {
     lastSearch: null,
+    lastSearchData: null,
     references: [],
     historic: [],
   },
@@ -23,6 +24,9 @@ const navigationSlice = createSlice({
         });
       }
     },
+    setLastSearchData(state, action) {
+      state.lastSearchData = action.payload;
+    },
     removeHistoric(state, action) {
       state.historic = state.historic.filter(
         (item) =>
@@ -32,15 +36,17 @@ const navigationSlice = createSlice({
     clearHistoric(state, _) {
       state.historic = [];
     },
-    addNewReferences(state, _) {
+    addNewReferences(state, action) {
       state.references.push({
+        ...state.lastSearchData,
         id: state.references.length + 1,
         url: state.lastSearch,
       });
     },
     removeReferences(state, action) {
       state.references = state.references.filter(
-        (item) => item.id != action.payload.id
+        (item) =>
+          !action.payload.find((itemSelected) => itemSelected == item.id)
       );
     },
     clearReferences(state, _) {
@@ -51,6 +57,7 @@ const navigationSlice = createSlice({
 
 export const {
   setLastSearch,
+  setLastSearchData,
   removeHistoric,
   clearHistoric,
   addNewReferences,
