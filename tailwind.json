@@ -55,6 +55,12 @@
 			"marginBottom": 4
 		}
 	},
+	"my-2": {
+		"style": {
+			"marginTop": 8,
+			"marginBottom": 8
+		}
+	},
 	"mt-4": {
 		"style": {
 			"marginTop": 16
