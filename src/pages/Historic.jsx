@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { View, SafeAreaView, Text, FlatList, Keyboard } from "react-native";
 
+import { StatusBar } from "expo-status-bar";
 import { useDispatch, useSelector } from "react-redux";
 import { useTailwind } from "tailwind-rn/dist";
 import { useNavigation } from "@react-navigation/native";
@@ -75,6 +76,7 @@ const Historic = () => {
 
   return (
     <>
+      <StatusBar translucent={false} />
       <SafeAreaView style={tw("flex-1 bg-white")}>
         <View style={tw("flex-1 bg-white")}>
           <Header

@@ -9,6 +9,7 @@ import {
   Animated,
 } from "react-native";
 
+import { StatusBar } from "expo-status-bar";
 import { getPreviewData } from "@flyerhq/react-native-link-preview";
 import { useDispatch, useSelector } from "react-redux";
 import { useTailwind } from "tailwind-rn/dist";
@@ -134,6 +135,7 @@ const References = () => {
 
   return (
     <>
+      <StatusBar translucent={false} />
       <SafeAreaView style={tw("flex-1 bg-white")}>
         <View style={tw("flex-1 bg-white")}>
           <Header

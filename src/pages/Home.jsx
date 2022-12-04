@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import { WebView } from "react-native-webview";
-
+import { StatusBar } from "expo-status-bar";
 import {
   setLastSearch,
   setLastSearchData,
@@ -74,36 +74,39 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={tw("flex-1 bg-white")}>
-      <View style={tw("flex-1 bg-white")}>
-        <KeyboardAvoidingView
-          style={tw("flex-1 bg-white")}
-          behavior={!isAndroid() ? "padding" : "height"}
-        >
-          {!lastSearch && <EmptyState />}
-          <OptionsBox ref={refBoxOptions} />
-          {lastSearch && (
-            <WebView
-              style={tw("flex-1")}
-              source={{ uri: lastSearch }}
-              onLoadProgress={(e) => setProgressValue(e.nativeEvent.progress)}
-              onLoadEnd={(e) => {
-                dispatch(setLastSearchData(e.nativeEvent));
-                loadFinished();
-              }}
+    <>
+      <StatusBar translucent={false} />
+      <SafeAreaView style={tw("flex-1 bg-white")}>
+        <View style={tw("flex-1 bg-white")}>
+          <KeyboardAvoidingView
+            style={tw("flex-1 bg-white")}
+            behavior={!isAndroid() ? "padding" : "height"}
+          >
+            {!lastSearch && <EmptyState />}
+            <OptionsBox ref={refBoxOptions} />
+            {lastSearch && (
+              <WebView
+                style={tw("flex-1")}
+                source={{ uri: lastSearch }}
+                onLoadProgress={(e) => setProgressValue(e.nativeEvent.progress)}
+                onLoadEnd={(e) => {
+                  dispatch(setLastSearchData(e.nativeEvent));
+                  loadFinished();
+                }}
+              />
+            )}
+            <LoadingBar value={progressValue} loading={loading} />
+            <InputBoss
+              value={searchAddress}
+              optionsRef={refBoxOptions}
+              onChangeText={(text) => setSearchAddress(text)}
+              pressOnSearch={handleSearchAddress}
+              hideOptions={hideOptions}
             />
-          )}
-          <LoadingBar value={progressValue} loading={loading} />
-          <InputBoss
-            value={searchAddress}
-            optionsRef={refBoxOptions}
-            onChangeText={(text) => setSearchAddress(text)}
-            pressOnSearch={handleSearchAddress}
-            hideOptions={hideOptions}
-          />
-        </KeyboardAvoidingView>
-      </View>
-    </SafeAreaView>
+          </KeyboardAvoidingView>
+        </View>
+      </SafeAreaView>
+    </>
   );
 };
 

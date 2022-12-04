@@ -130,6 +130,7 @@ const OptionsBox = forwardRef((props, ref) => {
           />
         }
         title="More"
+        onPress={() => navigation.navigate("About")}
       />
     </Animated.View>
   );
