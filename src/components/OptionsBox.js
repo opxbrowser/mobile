@@ -78,7 +78,7 @@ const OptionsBox = forwardRef((props, ref) => {
           Options
         </Text>
       </View>
-      <View style={tw("flex-row self-center")}>
+      <View style={tw("flex-row justify-between items-start")}>
         <OptionItem
           icon={
             <>
