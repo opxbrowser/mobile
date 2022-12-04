@@ -70,6 +70,10 @@
   margin-bottom: 1.5rem
 }
 
+.ml-6 {
+  margin-left: 1.5rem
+}
+
 .h-1 {
   height: 0.25rem
 }
@@ -120,6 +124,10 @@
 
 .rounded-xl {
   border-radius: 0.75rem
+}
+
+.rounded-full {
+  border-radius: 9999px
 }
 
 .bg-white {

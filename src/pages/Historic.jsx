@@ -1,4 +1,4 @@
-import React from "react";
+import { useCallback, useState } from "react";
 import { View, SafeAreaView, Text, FlatList, Keyboard } from "react-native";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,11 @@ const Historic = () => {
 
   const historic = useSelector((state) => state.navigation.historic);
 
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectMode, setSelectModal] = useState(false);
+
+  const [deleteMode, setDeleteModal] = useState(false);
+
   const handleSearchAddress = (searchAddress) => {
     Keyboard.dismiss();
     let newSearchAddress = searchAddress;
@@ -31,17 +36,57 @@ const Historic = () => {
     navigation.goBack();
   };
 
+  const handleSelectItem = useCallback(
+    (id) => {
+      if (!selectMode) setSelectModal(true);
+
+      if (!!selectedItems.find((item) => item == id)) {
+        let newList = selectedItems.filter((item) => item != id);
+        if (newList.length > 0) {
+          setSelectedItems(newList);
+        } else {
+          setSelectModal(false);
+          setSelectedItems([]);
+        }
+        return;
+      }
+
+      setSelectedItems([...selectedItems, id]);
+    },
+    [selectedItems, selectMode]
+  );
+
   return (
     <SafeAreaView style={tw("flex-1 bg-white")}>
       <View style={tw("flex-1 bg-white")}>
-        <Header title="Historic" />
+        <Header
+          title="Historic"
+          deleteMode={deleteMode}
+          selectMode={selectMode}
+          setSelectMode={(value) => {
+            setSelectModal(value);
+            setSelectedItems([]);
+          }}
+          selectData={{
+            totalItems: historic.length,
+            totalSelected: selectedItems.length,
+          }}
+        />
         <FlatList
           data={[...historic].reverse()}
           renderItem={({ item }) => (
             <ListItem
               title={item.url}
               description={getTextTime(item.timestamp)}
-              onPress={() => handleSearchAddress(item.url)}
+              onPress={() =>
+                selectMode
+                  ? handleSelectItem(item.id)
+                  : handleSearchAddress(item.url)
+              }
+              selected={
+                !!selectedItems.find((selectItem) => selectItem == item.id)
+              }
+              onSelect={() => handleSelectItem(item.id)}
             />
           )}
           ListHeaderComponent={<ListHeader total={historic.length} />}

@@ -1,10 +1,16 @@
 import { useCallback, useRef } from "react";
-import { View, Text, TouchableWithoutFeedback, Animated } from "react-native";
+import {
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  Animated,
+  Vibration,
+} from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 
 // import { Container } from './styles';
 
-const ListItem = ({ title, description, selected, onPress }) => {
+const ListItem = ({ title, description, selected, onPress, onSelect }) => {
   const tw = useTailwind();
 
   const messageAnimation = useRef(new Animated.Value(1)).current;
@@ -27,10 +33,16 @@ const ListItem = ({ title, description, selected, onPress }) => {
     }).start();
   }, [messageAnimation]);
 
+  const handleToOptions = useCallback(() => {
+    onSelect();
+    Vibration.vibrate(50, false);
+  }, []);
+
   return (
     <TouchableWithoutFeedback
       onPressIn={() => animateMessageIn()}
       onPressOut={() => animateMessageOut()}
+      onLongPress={() => handleToOptions()}
       onPress={onPress}
     >
       <Animated.View

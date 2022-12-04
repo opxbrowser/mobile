@@ -91,6 +91,11 @@
 			"marginBottom": 24
 		}
 	},
+	"ml-6": {
+		"style": {
+			"marginLeft": 24
+		}
+	},
 	"h-1": {
 		"style": {
 			"height": 4
@@ -162,6 +167,14 @@
 			"borderTopRightRadius": 12,
 			"borderBottomRightRadius": 12,
 			"borderBottomLeftRadius": 12
+		}
+	},
+	"rounded-full": {
+		"style": {
+			"borderTopLeftRadius": 9999,
+			"borderTopRightRadius": 9999,
+			"borderBottomRightRadius": 9999,
+			"borderBottomLeftRadius": 9999
 		}
 	},
 	"bg-white": {
