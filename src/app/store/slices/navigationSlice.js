@@ -41,8 +41,6 @@ const navigationSlice = createSlice({
         id: state.references.length + 1,
       };
 
-      console.log(action.payload);
-
       if (!action.payload) {
         data = {
           ...data,

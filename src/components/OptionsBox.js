@@ -52,7 +52,7 @@ const OptionsBox = forwardRef((props, ref) => {
   return (
     <Animated.View
       style={[
-        tw("bg-gray absolute mx-4 rounded-xl px-6 py-4 flex-row self-center"),
+        tw("bg-gray absolute mx-4 rounded-xl p-4 flex-row self-center"),
         {
           zIndex: 1,
           opacity: containerAnimation,

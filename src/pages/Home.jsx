@@ -30,7 +30,7 @@ const Home = () => {
   const refBoxOptions = useRef(null);
   const lastSearch = useSelector((state) => state.navigation.lastSearch);
 
-  const [searchAddress, setSearchAddress] = useState("tapedin.com.br");
+  const [searchAddress, setSearchAddress] = useState("");
   const [searchData, setSearchData] = useState({});
 
   const [hideOptions, setHideOptions] = useState(false);
