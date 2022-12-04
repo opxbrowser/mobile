@@ -10,6 +10,7 @@ import ListItem from "../components/ListItem";
 import ConfirmPopup from "../components/ConfirmPopup";
 
 import {
+  clearHistoric,
   removeHistoric,
   setLastSearch,
 } from "../app/store/slices/navigationSlice";
@@ -59,14 +60,17 @@ const Historic = () => {
     [deletedItems, deleteMode]
   );
 
-  const handleDeleteItemsSelected = useCallback(() => {
+  const handleDeleteItemsSelected = () => {
     dispatch(removeHistoric(deletedItems));
     setDeleteMode(false);
     setDeletedtems([]);
-  }, [deletedItems]);
+  };
 
   const handleDeleteFull = () => {
-    console.log("asdasdas");
+    dispatch(clearHistoric());
+    setDeleteMode(false);
+    setDeletedtems([]);
+    setDeleteModal(false);
   };
 
   return (
@@ -114,6 +118,7 @@ const Historic = () => {
       <ConfirmPopup
         visible={deleteModal}
         changeVisible={(value) => setDeleteModal(value)}
+        onConfirmDelete={handleDeleteFull}
         title="Clear Historic"
         description="Here you will clear all your OPX history. This attitude has no turning back."
       />
