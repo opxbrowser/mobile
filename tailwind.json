@@ -24,6 +24,18 @@
 			"marginRight": 16
 		}
 	},
+	"my-2": {
+		"style": {
+			"marginTop": 8,
+			"marginBottom": 8
+		}
+	},
+	"my-1": {
+		"style": {
+			"marginTop": 4,
+			"marginBottom": 4
+		}
+	},
 	"mt-4": {
 		"style": {
 			"marginTop": 16
@@ -62,6 +74,21 @@
 	"mt-6": {
 		"style": {
 			"marginTop": 24
+		}
+	},
+	"mt-1": {
+		"style": {
+			"marginTop": 4
+		}
+	},
+	"mb-4": {
+		"style": {
+			"marginBottom": 16
+		}
+	},
+	"mb-6": {
+		"style": {
+			"marginBottom": 24
 		}
 	},
 	"h-1": {
