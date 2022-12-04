@@ -120,6 +120,16 @@
 			"marginTop": 20
 		}
 	},
+	"mr-6": {
+		"style": {
+			"marginRight": 24
+		}
+	},
+	"mr-1": {
+		"style": {
+			"marginRight": 4
+		}
+	},
 	"h-1": {
 		"style": {
 			"height": 4

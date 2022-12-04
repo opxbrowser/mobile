@@ -22,27 +22,7 @@ const InputBoss = memo(
       <View>
         <View style={[tw("bg-primary-200 w-full"), { height: 1 }]} />
         <View style={tw("m-4 flex-row items-center")}>
-          <TextInput
-            {...rest}
-            style={[
-              tw(
-                `bg-gray px-6 ${
-                  !isAndroid() ? "py-2.5" : "py-1.5"
-                } rounded-2xl font-wRegular mr-2 flex-1`
-              ),
-              {
-                fontSize: 16,
-              },
-            ]}
-            placeholder="Enter website address"
-            placeholderTextColor={tw("text-dark-500").color}
-            autoCapitalize={"none"}
-            autoCorrect={false}
-            blurOnSubmit
-            textContentType="URL"
-            keyboardType="url"
-          />
-
+          <InputItem {...rest} />
           {!hideOptions && (
             <ButtonBoss
               icon={
@@ -100,6 +80,34 @@ const ButtonBoss = ({ icon, title, onPress, containerStyle }) => {
         )}
       </Animated.View>
     </TouchableOpacity>
+  );
+};
+
+export const InputItem = ({ inputStyle = {}, ...rest }) => {
+  const tw = useTailwind();
+
+  return (
+    <TextInput
+      {...rest}
+      style={[
+        tw(
+          `bg-gray px-6 ${
+            !isAndroid() ? "py-2.5" : "py-1.5"
+          } rounded-2xl font-wRegular mr-2 flex-1`
+        ),
+        {
+          fontSize: 16,
+        },
+        inputStyle,
+      ]}
+      placeholder="Enter website address"
+      placeholderTextColor={tw("text-dark-500").color}
+      autoCapitalize={"none"}
+      autoCorrect={false}
+      blurOnSubmit
+      textContentType="URL"
+      keyboardType="url"
+    />
   );
 };
 

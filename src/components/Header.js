@@ -7,6 +7,10 @@ import { TabRouter, useNavigation } from "@react-navigation/native";
 
 const Header = ({
   title,
+  referencesHeader,
+  newReferenceNow,
+  addNewReference,
+  saveNewRerence,
   deleteFullEnabled,
   onDeleteFull,
   deleteMode,
@@ -33,21 +37,58 @@ const Header = ({
           )}
         </View>
         {!deleteMode ? (
-          <View>
-            <TouchableOpacity
-              disabled={!deleteFullEnabled}
-              onPress={() => onDeleteFull()}
-            >
-              <MaterialCommunityIcons
-                name="trash-can-outline"
-                size={25}
-                color={
-                  !deleteFullEnabled
-                    ? tw("text-dark-400").color
-                    : tw("text-primary").color
-                }
-              />
-            </TouchableOpacity>
+          <View style={tw("flex-row items-center")}>
+            <View>
+              {referencesHeader && !newReferenceNow ? (
+                <TouchableOpacity onPress={() => addNewReference()}>
+                  <MaterialCommunityIcons
+                    name="attachment"
+                    size={25}
+                    color={tw("text-primary").color}
+                    style={tw("mr-6")}
+                  />
+                  <Text
+                    style={[
+                      tw("font-wMedium text-primary text-xl absolute"),
+                      {
+                        top: -10,
+                        right: 15,
+                      },
+                    ]}
+                  >
+                    +
+                  </Text>
+                </TouchableOpacity>
+              ) : (
+                newReferenceNow && (
+                  <TouchableOpacity onPress={() => saveNewRerence()}>
+                    <MaterialCommunityIcons
+                      name="check"
+                      size={25}
+                      color={tw("text-primary").color}
+                      style={tw("mr-1")}
+                    />
+                  </TouchableOpacity>
+                )
+              )}
+            </View>
+
+            {!newReferenceNow && (
+              <TouchableOpacity
+                disabled={!deleteFullEnabled}
+                onPress={() => onDeleteFull()}
+              >
+                <MaterialCommunityIcons
+                  name="trash-can-outline"
+                  size={25}
+                  color={
+                    !deleteFullEnabled
+                      ? tw("text-dark-400").color
+                      : tw("text-primary").color
+                  }
+                />
+              </TouchableOpacity>
+            )}
           </View>
         ) : (
           <View style={tw("flex-row items-center")}>

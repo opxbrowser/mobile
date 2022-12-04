@@ -1,9 +1,19 @@
-import { useCallback, useState } from "react";
-import { View, SafeAreaView, Text, FlatList, Keyboard } from "react-native";
+import { useCallback, useState, useRef, useEffect } from "react";
+import {
+  View,
+  SafeAreaView,
+  Text,
+  FlatList,
+  Keyboard,
+  TouchableOpacity,
+  Animated,
+} from "react-native";
 
+import { getPreviewData } from "@flyerhq/react-native-link-preview";
 import { useDispatch, useSelector } from "react-redux";
 import { useTailwind } from "tailwind-rn/dist";
 import { useNavigation } from "@react-navigation/native";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import Header from "../components/Header";
 import ListItem from "../components/ListItem";
@@ -12,8 +22,11 @@ import ConfirmPopup from "../components/ConfirmPopup";
 import {
   clearReferences,
   removeReferences,
+  addNewReferences,
   setLastSearch,
 } from "../app/store/slices/navigationSlice";
+import { InputItem } from "../components/InputBoss";
+import { REGEX_TITLE } from "../utils/regex";
 
 const References = () => {
   const navigation = useNavigation();
@@ -22,13 +35,37 @@ const References = () => {
 
   const references = useSelector((state) => state.navigation.references);
 
+  const animation = useRef(new Animated.Value(0)).current;
+
+  const [searchAddress, setSearchAddress] = useState("");
+  const [showInput, setShowInput] = useState(false);
+
+  const previousShowInput = useRef(showInput).current;
+
   const [deleteModal, setDeleteModal] = useState(false);
   const [deletedItems, setDeletedtems] = useState([]);
   const [deleteMode, setDeleteMode] = useState(false);
 
-  const handleSearchAddress = (searchAddress) => {
+  useEffect(() => {
+    if (!!showInput) {
+      Animated.spring(animation, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    } else if (
+      previousShowInput != undefined &&
+      !showInput &&
+      !previousShowInput
+    ) {
+      animation.setValue(0);
+      animation.setOffset(0);
+    }
+  }, [showInput, animation]);
+
+  const handleSearchAddress = (address) => {
     Keyboard.dismiss();
-    let newSearchAddress = searchAddress;
+    let newSearchAddress = address;
 
     if (!newSearchAddress.includes("https://")) {
       newSearchAddress = `https://${newSearchAddress}`;
@@ -71,12 +108,39 @@ const References = () => {
     setDeleteModal(false);
   };
 
+  const handleSaveNewReference = async () => {
+    try {
+      let newSearchAddress = searchAddress;
+
+      if (!newSearchAddress.includes("https://")) {
+        newSearchAddress = `https://${newSearchAddress}`;
+      }
+
+      const data = await getPreviewData(newSearchAddress);
+
+      dispatch(
+        addNewReferences({
+          url: newSearchAddress,
+          ...data,
+        })
+      );
+      setSearchAddress("");
+      setShowInput(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <SafeAreaView style={tw("flex-1 bg-white")}>
         <View style={tw("flex-1 bg-white")}>
           <Header
             title="Your References"
+            referencesHeader
+            newReferenceNow={showInput}
+            addNewReference={() => setShowInput(true)}
+            saveNewRerence={() => handleSaveNewReference()}
             deleteMode={deleteMode}
             onPressDelete={handleDeleteItemsSelected}
             setDeleteMode={(value) => {
@@ -90,6 +154,34 @@ const References = () => {
               totalSelected: deletedItems.length,
             }}
           />
+          {showInput && (
+            <Animated.View
+              style={[
+                tw("flex-row mx-4 items-center"),
+                {
+                  opacity: animation,
+                  marginTop: animation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 20],
+                  }),
+                },
+              ]}
+            >
+              <InputItem
+                value={searchAddress}
+                onChangeText={(text) => setSearchAddress(text)}
+                autoFocus
+              />
+              <TouchableOpacity onPress={() => setShowInput(false)}>
+                <MaterialCommunityIcons
+                  name="close"
+                  color={tw("text-dark-400").color}
+                  size={20}
+                  style={tw("mr-1")}
+                />
+              </TouchableOpacity>
+            </Animated.View>
+          )}
           <FlatList
             data={[...references].reverse()}
             renderItem={({ item }) => (

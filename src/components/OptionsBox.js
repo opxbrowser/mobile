@@ -71,11 +71,26 @@ const OptionsBox = forwardRef((props, ref) => {
     >
       <OptionItem
         icon={
-          <MaterialCommunityIcons
-            name={!!isReferenceSaved ? "check-decagram" : "attachment"}
-            size={22}
-            color={tw("text-primary").color}
-          />
+          <>
+            <MaterialCommunityIcons
+              name={!!isReferenceSaved ? "check-decagram" : "attachment"}
+              size={22}
+              color={tw("text-primary").color}
+            />
+            {!isReferenceSaved && (
+              <Text
+                style={[
+                  tw("font-wMedium text-primary text-xl absolute"),
+                  {
+                    top: -5,
+                    right: 10,
+                  },
+                ]}
+              >
+                +
+              </Text>
+            )}
+          </>
         }
         title={
           !!isReferenceSaved ? "Saved in your references" : "Save as reference"

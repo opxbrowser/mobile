@@ -59,17 +59,25 @@ const ListItem = ({ title, description, selected, onPress, onSelect }) => {
           },
         ]}
       >
-        <Text
-          style={tw(
-            `font-wRegular ${
-              description ? "text-dark" : "text-primary"
-            } text-base`
-          )}
-        >
-          {title}
-        </Text>
+        {!!title && (
+          <Text
+            style={tw(
+              `font-wRegular ${
+                description ? "text-dark" : "text-primary"
+              } text-base`
+            )}
+          >
+            {title}
+          </Text>
+        )}
         {!!description && (
-          <Text style={tw("font-wMedium mt-1 text-primary")}>
+          <Text
+            style={tw(
+              `font-wMedium mt-1 ${
+                !!title ? "text-sm" : "text-base"
+              } text-primary`
+            )}
+          >
             {description}
           </Text>
         )}

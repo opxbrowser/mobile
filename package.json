@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/work-sans": "^0.2.2",
+    "@flyerhq/react-native-link-preview": "^1.6.0",
     "@react-navigation/native": "^6.0.16",
     "@react-navigation/native-stack": "^6.9.4",
     "@reduxjs/toolkit": "^1.9.1",

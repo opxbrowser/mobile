@@ -37,11 +37,26 @@ const navigationSlice = createSlice({
       state.historic = [];
     },
     addNewReferences(state, action) {
-      state.references.push({
-        ...state.lastSearchData,
+      let data = {
         id: state.references.length + 1,
-        url: state.lastSearch,
-      });
+      };
+
+      console.log(action.payload);
+
+      if (!action.payload) {
+        data = {
+          ...data,
+          ...state.lastSearchData,
+          url: state.lastSearch,
+        };
+      } else {
+        data = {
+          ...data,
+          ...action.payload,
+        };
+      }
+
+      state.references.push(data);
     },
     removeReferences(state, action) {
       state.references = state.references.filter(
