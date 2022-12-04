@@ -152,11 +152,11 @@ const OptionsBox = forwardRef((props, ref) => {
                   !isAndroid()
                     ? {
                         title: lastSearchData?.title ?? "",
-                        url: lastSearch,
+                        url: lastSearchData?.url,
                       }
                     : {
                         title: lastSearchData?.title ?? "",
-                        message: lastSearch,
+                        message: lastSearchData?.url,
                       }
                 )
               : null
