@@ -4,7 +4,7 @@ import { useTailwind } from "tailwind-rn/dist";
 
 // import { Container } from './styles';
 
-const ListItem = ({ title, description }) => {
+const ListItem = ({ title, description, selected }) => {
   const tw = useTailwind();
 
   const messageAnimation = useRef(new Animated.Value(1)).current;
@@ -36,6 +36,8 @@ const ListItem = ({ title, description }) => {
         style={[
           tw("bg-primary-200 mx-4 px-6 py-4 rounded-xl"),
           {
+            borderWidth: !!selected ? 2 : 0,
+            borderColor: tw("text-primary").color,
             transform: [
               {
                 scale: messageAnimation,
