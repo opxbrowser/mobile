@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Header from "../components/Header";
 import ListItem from "../components/ListItem";
+import ConfirmPopup from "../components/ConfirmPopup";
 
 import {
   removeHistoric,
@@ -22,6 +23,7 @@ const Historic = () => {
 
   const historic = useSelector((state) => state.navigation.historic);
 
+  const [deleteModal, setDeleteModal] = useState(false);
   const [deletedItems, setDeletedtems] = useState([]);
   const [deleteMode, setDeleteMode] = useState(false);
 
@@ -63,45 +65,59 @@ const Historic = () => {
     setDeletedtems([]);
   }, [deletedItems]);
 
+  const handleDeleteFull = () => {
+    console.log("asdasdas");
+  };
+
   return (
-    <SafeAreaView style={tw("flex-1 bg-white")}>
-      <View style={tw("flex-1 bg-white")}>
-        <Header
-          title="Historic"
-          deleteMode={deleteMode}
-          onPressDelete={handleDeleteItemsSelected}
-          setDeleteMode={(value) => {
-            setDeleteMode(value);
-            setDeletedtems([]);
-          }}
-          selectData={{
-            totalItems: historic.length,
-            totalSelected: deletedItems.length,
-          }}
-        />
-        <FlatList
-          data={[...historic].reverse()}
-          renderItem={({ item }) => (
-            <ListItem
-              title={item.url}
-              description={getTextTime(item.timestamp)}
-              onPress={() =>
-                deleteMode
-                  ? handleDeleteItem(item.id)
-                  : handleSearchAddress(item.url)
-              }
-              selected={
-                !!deletedItems.find((selectItem) => selectItem == item.id)
-              }
-              onSelect={() => handleDeleteItem(item.id)}
-            />
-          )}
-          ListHeaderComponent={<ListHeader total={historic.length} />}
-          ItemSeparatorComponent={<View style={tw("my-1")} />}
-          keyExtractor={(item) => String(item.id)}
-        />
-      </View>
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={tw("flex-1 bg-white")}>
+        <View style={tw("flex-1 bg-white")}>
+          <Header
+            title="Historic"
+            deleteMode={deleteMode}
+            onPressDelete={handleDeleteItemsSelected}
+            setDeleteMode={(value) => {
+              setDeleteMode(value);
+              setDeletedtems([]);
+            }}
+            deleteFullEnabled={historic.length > 0}
+            onDeleteFull={() => setDeleteModal(true)}
+            selectData={{
+              totalItems: historic.length,
+              totalSelected: deletedItems.length,
+            }}
+          />
+          <FlatList
+            data={[...historic].reverse()}
+            renderItem={({ item }) => (
+              <ListItem
+                title={item.url}
+                description={getTextTime(item.timestamp)}
+                onPress={() =>
+                  deleteMode
+                    ? handleDeleteItem(item.id)
+                    : handleSearchAddress(item.url)
+                }
+                selected={
+                  !!deletedItems.find((selectItem) => selectItem == item.id)
+                }
+                onSelect={() => handleDeleteItem(item.id)}
+              />
+            )}
+            ListHeaderComponent={<ListHeader total={historic.length} />}
+            ItemSeparatorComponent={<View style={tw("my-1")} />}
+            keyExtractor={(item) => String(item.id)}
+          />
+        </View>
+      </SafeAreaView>
+      <ConfirmPopup
+        visible={deleteModal}
+        changeVisible={(value) => setDeleteModal(value)}
+        title="Clear Historic"
+        description="Here you will clear all your OPX history. This attitude has no turning back."
+      />
+    </>
   );
 };
 

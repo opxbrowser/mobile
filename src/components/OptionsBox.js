@@ -118,7 +118,7 @@ const OptionsBox = forwardRef((props, ref) => {
   );
 });
 
-const OptionItem = ({ onPress, icon, title, disabled = false }) => {
+export const OptionItem = ({ onPress, icon, title, disabled = false }) => {
   const tw = useTailwind();
 
   return (
@@ -128,13 +128,15 @@ const OptionItem = ({ onPress, icon, title, disabled = false }) => {
           `justify-center items-center ${!!disabled ? "opacity-50" : ""}`
         )}
       >
-        <View
-          style={tw(
-            "bg-primary-400 rounded-xl w-14 h-10 rounded-xl justify-center items-center"
-          )}
-        >
-          {icon}
-        </View>
+        {!!icon && (
+          <View
+            style={tw(
+              "bg-primary-400 rounded-xl w-14 h-10 rounded-xl justify-center items-center"
+            )}
+          >
+            {icon}
+          </View>
+        )}
         <Text
           style={tw(
             "text-xs font-wRegular mt-2 text-dark-500 w-20 text-center"

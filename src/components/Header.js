@@ -7,6 +7,8 @@ import { TabRouter, useNavigation } from "@react-navigation/native";
 
 const Header = ({
   title,
+  deleteFullEnabled,
+  onDeleteFull,
   deleteMode,
   onPressDelete,
   setDeleteMode,
@@ -34,11 +36,18 @@ const Header = ({
         </View>
         {!deleteMode ? (
           <View>
-            <TouchableOpacity onPress={() => setDeleteMode(TabRouter)}>
+            <TouchableOpacity
+              disabled={!deleteFullEnabled}
+              onPress={() => onDeleteFull()}
+            >
               <MaterialCommunityIcons
                 name="trash-can-outline"
                 size={25}
-                color={tw("text-primary").color}
+                color={
+                  !deleteFullEnabled
+                    ? tw("text-dark-400").color
+                    : tw("text-primary").color
+                }
               />
             </TouchableOpacity>
           </View>
