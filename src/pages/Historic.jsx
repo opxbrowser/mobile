@@ -8,7 +8,10 @@ import { useNavigation } from "@react-navigation/native";
 import Header from "../components/Header";
 import ListItem from "../components/ListItem";
 
-import { setLastSearch } from "../app/store/slices/navigationSlice";
+import {
+  removeHistoric,
+  setLastSearch,
+} from "../app/store/slices/navigationSlice";
 
 import { getTextTime } from "../utils/textDate";
 
@@ -18,9 +21,6 @@ const Historic = () => {
   const dispatch = useDispatch();
 
   const historic = useSelector((state) => state.navigation.historic);
-
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [selectMode, setSelectModal] = useState(false);
 
   const [deletedItems, setDeletedtems] = useState([]);
   const [deleteMode, setDeleteMode] = useState(false);
@@ -58,7 +58,9 @@ const Historic = () => {
   );
 
   const handleDeleteItemsSelected = useCallback(() => {
-    console.log(deletedItems);
+    dispatch(removeHistoric(deletedItems));
+    setDeleteMode(false);
+    setDeletedtems([]);
   }, [deletedItems]);
 
   return (

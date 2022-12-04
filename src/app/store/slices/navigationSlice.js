@@ -25,7 +25,8 @@ const navigationSlice = createSlice({
     },
     removeHistoric(state, action) {
       state.historic = state.historic.filter(
-        (item) => item.id != action.payload.id
+        (item) =>
+          !action.payload.find((itemSelected) => itemSelected == item.id)
       );
     },
     clearHistoric(state, _) {
