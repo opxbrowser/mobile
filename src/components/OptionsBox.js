@@ -5,9 +5,9 @@ import {
   TouchableOpacity,
   Animated,
   useWindowDimensions,
+  Share,
 } from "react-native";
 
-import * as Sharing from "expo-sharing";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { useTailwind } from "tailwind-rn/dist";
@@ -147,8 +147,8 @@ const OptionsBox = forwardRef((props, ref) => {
           }
           onPress={() =>
             !!lastSearch
-              ? Sharing.shareAsync(lastSearch, {
-                  dialogTitle: lastSearchData?.title,
+              ? Share.share(lastSearch, {
+                  dialogTitle: lastSearchData?.title ?? "",
                 })
               : null
           }
