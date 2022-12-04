@@ -61,7 +61,7 @@ const About = () => {
         <Button title="Service Terms" />
         <Text style={tw("font-wMedium text-base my-6 self-center text-dark")}>
           {" "}
-          @Opx Browser 1.0.0
+          @Opx Browser {Constants.expoConfig.version}
         </Text>
         <View style={tw("flex-1 justify-center items-center")}>
           <View>
