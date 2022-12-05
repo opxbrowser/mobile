@@ -43,7 +43,6 @@ const Home = () => {
 
   useEffect(() => {
     if (!!address && address != lastSearch) {
-      console.log(address);
       handleSearchAddress(address);
     }
   }, [address, lastSearch]);
