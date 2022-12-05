@@ -3,8 +3,6 @@ import { TailwindProvider } from "tailwind-rn";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 
-import { View } from "react-native";
-
 import {
   useFonts,
   WorkSans_300Light,
