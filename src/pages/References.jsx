@@ -66,14 +66,9 @@ const References = () => {
 
   const handleSearchAddress = (address) => {
     Keyboard.dismiss();
-    let newSearchAddress = address;
-
-    if (!newSearchAddress.includes("https://")) {
-      newSearchAddress = `https://${newSearchAddress}`;
-    }
-
-    dispatch(setLastSearch(newSearchAddress));
-    navigation.navigate("Home");
+    navigation.navigate("Home", {
+      address,
+    });
   };
 
   const handleDeleteItem = useCallback(

@@ -13,8 +13,10 @@ import {
   setLastSearch,
   setLastSearchData,
 } from "../app/store/slices/navigationSlice";
+
 import { useSelector, useDispatch } from "react-redux";
 import { useTailwind } from "tailwind-rn";
+import { useRoute } from "@react-navigation/native";
 
 import OptionsBox from "../components/OptionsBox";
 import EmptyState from "../components/EmptyState";
@@ -26,6 +28,9 @@ import isAndroid from "../utils/isAndroid";
 const Home = () => {
   const tw = useTailwind();
   const dispatch = useDispatch();
+  const { params } = useRoute();
+
+  const address = params?.address;
 
   const refBoxOptions = useRef(null);
   const lastSearch = useSelector((state) => state.navigation.lastSearch);
@@ -35,6 +40,13 @@ const Home = () => {
   const [hideOptions, setHideOptions] = useState(false);
   const [loading, setLoading] = useState(false);
   const [progressValue, setProgressValue] = useState(0);
+
+  useEffect(() => {
+    if (!!address && address != lastSearch) {
+      console.log(address);
+      handleSearchAddress(address);
+    }
+  }, [address, lastSearch]);
 
   useEffect(() => {
     let keyboard = [];
@@ -50,18 +62,19 @@ const Home = () => {
     return () => keyboard.map((item) => item.remove());
   }, []);
 
-  const handleSearchAddress = () => {
-    if (!searchAddress && lastSearch) {
+  const handleSearchAddress = (newAddress) => {
+    let newSearchAddress = newAddress ?? searchAddress;
+
+    if (!newSearchAddress && lastSearch) {
       dispatch(setLastSearch(null));
       return;
     }
 
     Keyboard.dismiss();
     setLoading(true);
-    let newSearchAddress = searchAddress;
 
     if (
-      !newSearchAddress.includes("https://") ||
+      !newSearchAddress.includes("https://") &&
       !newSearchAddress.includes("http://")
     ) {
       newSearchAddress = `https://${newSearchAddress}`;
@@ -104,7 +117,7 @@ const Home = () => {
               value={searchAddress}
               optionsRef={refBoxOptions}
               onChangeText={(text) => setSearchAddress(text)}
-              pressOnSearch={handleSearchAddress}
+              pressOnSearch={() => handleSearchAddress()}
               hideOptions={hideOptions}
             />
           </KeyboardAvoidingView>

@@ -29,16 +29,11 @@ const Historic = () => {
   const [deletedItems, setDeletedtems] = useState([]);
   const [deleteMode, setDeleteMode] = useState(false);
 
-  const handleSearchAddress = (searchAddress) => {
+  const handleSearchAddress = (address) => {
     Keyboard.dismiss();
-    let newSearchAddress = searchAddress;
-
-    if (!newSearchAddress.includes("https://")) {
-      newSearchAddress = `https://${newSearchAddress}`;
-    }
-
-    dispatch(setLastSearch(newSearchAddress));
-    navigation.navigate("Home");
+    navigation.navigate("Home", {
+      address,
+    });
   };
 
   const handleDeleteItem = useCallback(
