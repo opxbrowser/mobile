@@ -17,9 +17,12 @@
     "@react-navigation/native-stack": "^6.9.4",
     "@reduxjs/toolkit": "^1.9.1",
     "expo": "~47.0.8",
+    "expo-constants": "~14.0.2",
     "expo-font": "~11.0.1",
     "expo-linear-gradient": "~12.0.1",
+    "expo-sharing": "~11.0.1",
     "expo-status-bar": "~1.4.2",
+    "expo-updates": "~0.15.6",
     "lottie-react-native": "5.1.4",
     "moment": "^2.29.4",
     "moment-range": "^4.0.2",
@@ -32,10 +35,9 @@
     "react-native-webview": "11.23.1",
     "react-redux": "^8.0.5",
     "redux": "^4.2.0",
+    "redux-persist": "^6.0.0",
     "tailwind-rn": "^4.2.0",
-    "expo-constants": "~14.0.2",
-    "expo-updates": "~0.15.6",
-    "expo-sharing": "~11.0.1"
+    "@react-native-async-storage/async-storage": "~1.17.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
