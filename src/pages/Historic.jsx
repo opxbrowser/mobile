@@ -38,7 +38,7 @@ const Historic = () => {
     }
 
     dispatch(setLastSearch(newSearchAddress));
-    navigation.goBack();
+    navigation.navigate("Home");
   };
 
   const handleDeleteItem = useCallback(
