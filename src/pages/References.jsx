@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   Text,
   FlatList,
-  Keyboard,
   TouchableOpacity,
   Animated,
 } from "react-native";
@@ -65,7 +64,6 @@ const References = () => {
   }, [showInput, animation]);
 
   const handleSearchAddress = (address) => {
-    Keyboard.dismiss();
     navigation.navigate("Home", {
       address,
     });
