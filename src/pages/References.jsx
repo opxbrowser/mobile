@@ -126,6 +126,10 @@ const References = () => {
     }
   };
 
+  function handleVerifyDirectItem(item) {
+    deleteMode ? handleDeleteItem(item.id) : handleSearchAddress(item.url);
+  }
+
   return (
     <>
       <StatusBar translucent={false} />
@@ -188,11 +192,7 @@ const References = () => {
               <ListItem
                 title={item.title}
                 description={item.url}
-                onPress={() =>
-                  deleteMode
-                    ? handleDeleteItem(item.id)
-                    : handleSearchAddress(item.url)
-                }
+                onPress={() => handleVerifyDirectItem(item)}
                 selected={
                   !!deletedItems.find((selectItem) => selectItem == item.id)
                 }
