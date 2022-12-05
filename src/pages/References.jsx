@@ -73,7 +73,7 @@ const References = () => {
     }
 
     dispatch(setLastSearch(newSearchAddress));
-    navigation.goBack();
+    navigation.navigate("Home");
   };
 
   const handleDeleteItem = useCallback(
