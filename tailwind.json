@@ -158,16 +158,6 @@
 			"flexBasis": "0%"
 		}
 	},
-	"shrink": {
-		"style": {
-			"flexShrink": 1
-		}
-	},
-	"grow": {
-		"style": {
-			"flexGrow": 1
-		}
-	},
 	"flex-row": {
 		"style": {
 			"flexDirection": "row"
