@@ -107,6 +107,7 @@ const Home = () => {
                 onLoadProgress={(e) => setProgressValue(e.nativeEvent.progress)}
                 onLoadEnd={(e) => {
                   dispatch(setLastSearchData(e.nativeEvent));
+                  setSearchAddress(e.nativeEvent.url);
                   loadFinished();
                 }}
               />
