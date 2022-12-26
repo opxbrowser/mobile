@@ -53,11 +53,7 @@ const References = () => {
         duration: 300,
         useNativeDriver: false,
       }).start();
-    } else if (
-      previousShowInput != undefined &&
-      !showInput &&
-      !previousShowInput
-    ) {
+    } else if (previousShowInput != undefined && !showInput) {
       animation.setValue(0);
       animation.setOffset(0);
     }
