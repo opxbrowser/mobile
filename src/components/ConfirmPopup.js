@@ -21,7 +21,7 @@ const ConfirmPopup = ({
   const animation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    if (!!visible) {
+    if (visible) {
       setContainerVisible(true);
       Animated.timing(animation, {
         toValue: 1,

@@ -41,8 +41,10 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [progressValue, setProgressValue] = useState(0);
 
+  console.log(progressValue);
+
   useEffect(() => {
-    if (!!address && address != lastSearch) {
+    if (address && address != lastSearch) {
       handleSearchAddress(address);
     }
   }, [address, lastSearch]);
@@ -104,7 +106,12 @@ const Home = () => {
               <WebView
                 style={tw("flex-1")}
                 source={{ uri: lastSearch }}
-                onLoadProgress={(e) => setProgressValue(e.nativeEvent.progress)}
+                onLoadProgress={(e) => {
+                  setProgressValue(e.nativeEvent.progress);
+                  if (e.nativeEvent.progress >= 1) {
+                    loadFinished();
+                  }
+                }}
                 onLoadEnd={(e) => {
                   dispatch(setLastSearchData(e.nativeEvent));
                   setSearchAddress(e.nativeEvent.url);

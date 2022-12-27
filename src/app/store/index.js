@@ -3,12 +3,14 @@ import navigationReducer from "./slices/navigationSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const persistConfig = {
-  key: "@opx-browser:root",
-  storage: AsyncStorage,
-};
-
-const persistedReducer = persistReducer(persistConfig, navigationReducer);
+const persistedReducer = persistReducer(
+  {
+    key: "root3",
+    storage: AsyncStorage,
+    timeout: 1000,
+  },
+  navigationReducer
+);
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +19,10 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
+      thunk: false,
     }),
 });
+
+store.subscribe(() => console.log(store.getState()));
 
 export const persistor = persistStore(store);

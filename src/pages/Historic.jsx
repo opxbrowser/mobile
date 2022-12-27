@@ -40,7 +40,7 @@ const Historic = () => {
     (id) => {
       if (!deleteMode) setDeleteMode(true);
 
-      if (!!deletedItems.find((item) => item == id)) {
+      if (deletedItems.find((item) => item == id)) {
         let newList = deletedItems.filter((item) => item != id);
         if (newList.length > 0) {
           setDeletedtems(newList);
@@ -101,7 +101,9 @@ const Historic = () => {
                     : handleSearchAddress(item.url)
                 }
                 selected={
-                  !!deletedItems.find((selectItem) => selectItem == item.id)
+                  deletedItems.find((selectItem) => selectItem == item.id)
+                    ? true
+                    : false
                 }
                 onSelect={() => handleDeleteItem(item.id)}
               />

@@ -50,7 +50,7 @@ const OptionsBox = forwardRef((props, ref) => {
   }, [ref, containerAnimation]);
 
   const isReferenceSaved = useMemo(
-    () => references.find((item) => item.url == lastSearch),
+    () => (references.find((item) => item.url == lastSearch) ? true : false),
     [references, lastSearch]
   );
 
@@ -88,7 +88,7 @@ const OptionsBox = forwardRef((props, ref) => {
           icon={
             <>
               <MaterialCommunityIcons
-                name={!!isReferenceSaved ? "check-decagram" : "attachment"}
+                name={isReferenceSaved ? "check-decagram" : "attachment"}
                 size={22}
                 color={tw("text-primary").color}
               />
@@ -108,9 +108,7 @@ const OptionsBox = forwardRef((props, ref) => {
             </>
           }
           title={
-            !!isReferenceSaved
-              ? "Saved in your references"
-              : "Save as reference"
+            isReferenceSaved ? "Saved in your references" : "Save as reference"
           }
           isReferenceSaved={isReferenceSaved}
           disabled={isReferenceSaved || !lastSearch}
@@ -147,7 +145,7 @@ const OptionsBox = forwardRef((props, ref) => {
             />
           }
           onPress={() =>
-            !!lastSearch
+            lastSearch
               ? Share.share(
                   !isAndroid()
                     ? {
@@ -197,13 +195,13 @@ export const OptionItem = ({
         style={[
           tw(
             `justify-center items-center ${
-              !!disabled && !isReferenceSaved ? "opacity-50" : ""
+              disabled && !isReferenceSaved ? "opacity-50" : ""
             }`
           ),
           containerStyle,
         ]}
       >
-        {!!icon && (
+        {icon && (
           <View
             style={tw(
               "bg-primary-400 rounded-xl w-14 h-10 rounded-xl justify-center items-center"

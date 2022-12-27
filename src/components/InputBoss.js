@@ -41,7 +41,7 @@ const InputBoss = memo(
                 )
               }
               onPress={() => {
-                if (!!boxOpened) {
+                if (boxOpened) {
                   optionsRef?.current?.close();
                   setBoxOpened(false);
                   return;

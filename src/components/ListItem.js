@@ -49,7 +49,7 @@ const ListItem = ({ title, description, selected, onPress, onSelect }) => {
         style={[
           tw("bg-primary-200 mx-4 px-6 py-4 rounded-xl"),
           {
-            borderWidth: !!selected ? 2 : 0,
+            borderWidth: selected ? 2 : 0,
             borderColor: tw("text-primary").color,
             transform: [
               {
@@ -59,7 +59,7 @@ const ListItem = ({ title, description, selected, onPress, onSelect }) => {
           },
         ]}
       >
-        {!!title && (
+        {title && (
           <Text
             style={tw(
               `font-wRegular ${
@@ -70,11 +70,11 @@ const ListItem = ({ title, description, selected, onPress, onSelect }) => {
             {title}
           </Text>
         )}
-        {!!description && (
+        {description && (
           <Text
             style={tw(
               `font-wMedium mt-1 ${
-                !!title ? "text-sm" : "text-base"
+                title ? "text-sm" : "text-base"
               } text-primary`
             )}
           >

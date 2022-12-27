@@ -47,7 +47,7 @@ const References = () => {
   const [deleteMode, setDeleteMode] = useState(false);
 
   useEffect(() => {
-    if (!!showInput) {
+    if (showInput) {
       Animated.spring(animation, {
         toValue: 1,
         duration: 300,
@@ -69,7 +69,7 @@ const References = () => {
     (id) => {
       if (!deleteMode) setDeleteMode(true);
 
-      if (!!deletedItems.find((item) => item == id)) {
+      if (deletedItems.find((item) => item == id)) {
         let newList = deletedItems.filter((item) => item != id);
         if (newList.length > 0) {
           setDeletedtems(newList);
@@ -190,7 +190,9 @@ const References = () => {
                 description={item.url}
                 onPress={() => handleVerifyDirectItem(item)}
                 selected={
-                  !!deletedItems.find((selectItem) => selectItem == item.id)
+                  deletedItems.find((selectItem) => selectItem == item.id)
+                    ? true
+                    : false
                 }
                 onSelect={() => handleDeleteItem(item.id)}
               />

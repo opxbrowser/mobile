@@ -38,7 +38,7 @@ const navigationSlice = createSlice({
           !action.payload.find((itemSelected) => itemSelected == item.id)
       );
     },
-    clearHistoric(state, _) {
+    clearHistoric(state, action) {
       state.historic = [];
     },
     addNewReferences(state, action) {
@@ -67,7 +67,7 @@ const navigationSlice = createSlice({
           !action.payload.find((itemSelected) => itemSelected == item.id)
       );
     },
-    clearReferences(state, _) {
+    clearReferences(state, action) {
       state.references = [];
     },
   },
