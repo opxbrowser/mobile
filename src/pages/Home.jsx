@@ -16,7 +16,7 @@ import {
 
 import { useSelector, useDispatch } from "react-redux";
 import { useTailwind } from "tailwind-rn";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import OptionsBox from "../components/OptionsBox";
 import EmptyState from "../components/EmptyState";
@@ -27,6 +27,7 @@ import isAndroid from "../utils/isAndroid";
 
 const Home = () => {
   const tw = useTailwind();
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const { params } = useRoute();
 
@@ -42,8 +43,11 @@ const Home = () => {
   const [progressValue, setProgressValue] = useState(0);
 
   useEffect(() => {
-    if (address && address != lastSearch) {
+    if (!!address && address != lastSearch) {
       handleSearchAddress(address);
+      navigation.setParams({
+        address: null,
+      });
     }
   }, [address, lastSearch]);
 
