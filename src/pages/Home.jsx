@@ -41,8 +41,6 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [progressValue, setProgressValue] = useState(0);
 
-  console.log(progressValue);
-
   useEffect(() => {
     if (address && address != lastSearch) {
       handleSearchAddress(address);
