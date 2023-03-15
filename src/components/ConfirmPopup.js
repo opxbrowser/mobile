@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, Animated, useWindowDimensions } from "react-native";
+import {
+  View,
+  Text,
+  Animated,
+  useWindowDimensions,
+  TouchableWithoutFeedback,
+} from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { useTailwind } from "tailwind-rn/dist";
@@ -56,30 +62,36 @@ const ConfirmPopup = ({
         },
       ]}
     >
-      <LinearGradient
-        colors={["rgba(255, 255, 255, 0.5)", tw("text-primary-400").color]}
-        style={tw("flex-1 justify-center px-4")}
-      >
-        <View style={tw("bg-white rounded-3xl p-6")}>
-          <Text style={tw("text-xl text-center font-wMedium text-dark")}>
-            {title}
-          </Text>
-          <Text
-            style={tw("text-base my-4 text-center font-wMedium text-dark-400")}
-          >
-            {description}
-          </Text>
-          <View style={tw("mt-4")}>
-            <Button title={"Excluir"} onPress={onConfirmDelete} />
-            <Button
-              title={"Fechar"}
-              containerStyle={tw("mt-2 bg-gray")}
-              titleStyle={tw("text-dark-500")}
-              onPress={() => changeVisible(false)}
-            />
-          </View>
-        </View>
-      </LinearGradient>
+      <TouchableWithoutFeedback onPress={() => changeVisible(false)}>
+        <LinearGradient
+          colors={["rgba(255, 255, 255, 0.5)", tw("text-primary-400").color]}
+          style={tw("flex-1 justify-center px-4")}
+        >
+          <TouchableWithoutFeedback onPress={() => {}}>
+            <View style={tw("bg-white rounded-3xl p-6")}>
+              <Text style={tw("text-xl text-center font-wMedium text-dark")}>
+                {title}
+              </Text>
+              <Text
+                style={tw(
+                  "text-base my-4 text-center font-wMedium text-dark-400"
+                )}
+              >
+                {description}
+              </Text>
+              <View style={tw("mt-4")}>
+                <Button title={"Excluir"} onPress={onConfirmDelete} />
+                <Button
+                  title={"Fechar"}
+                  containerStyle={tw("mt-2 bg-gray")}
+                  titleStyle={tw("text-dark-500")}
+                  onPress={() => changeVisible(false)}
+                />
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        </LinearGradient>
+      </TouchableWithoutFeedback>
     </Animated.View>
   );
 };

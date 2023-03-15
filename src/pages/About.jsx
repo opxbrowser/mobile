@@ -4,6 +4,7 @@ import {
   ImageBackground,
   useWindowDimensions,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 
 import Constants from "expo-constants";
@@ -14,6 +15,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Background from "../assets/background.png";
 import Logo from "../assets/logo.svg";
 import { useNavigation } from "@react-navigation/native";
+import { websiteInfo } from "../constants/appInfo";
 
 const About = () => {
   const { width } = useWindowDimensions();
@@ -56,11 +58,25 @@ const About = () => {
             </Text>
           </View>
         </ImageBackground>
-        <Button title="About" />
-        <Button title="Data Policy" />
-        <Button title="Service Terms" />
+        <Button
+          title="About"
+          onPress={() =>
+            Linking.openURL(`${websiteInfo.URL}${websiteInfo.routes.about}`)
+          }
+        />
+        <Button
+          title="Data Policy"
+          onPress={() =>
+            Linking.openURL(`${websiteInfo.URL}${websiteInfo.routes.policy}`)
+          }
+        />
+        <Button
+          title="Service Terms"
+          onPress={() =>
+            Linking.openURL(`${websiteInfo.URL}${websiteInfo.routes.terms}`)
+          }
+        />
         <Text style={tw("font-wMedium text-base my-6 self-center text-dark")}>
-          {" "}
           @Opx Browser {Constants.expoConfig.version}
         </Text>
         <View style={tw("flex-1 justify-center items-center")}>

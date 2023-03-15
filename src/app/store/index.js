@@ -5,9 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const persistedReducer = persistReducer(
   {
-    key: "root3",
+    key: "root4",
     storage: AsyncStorage,
-    timeout: 1000,
   },
   navigationReducer
 );
@@ -18,7 +17,7 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false,
+      serializableCheck: true,
       thunk: false,
     }),
 });
