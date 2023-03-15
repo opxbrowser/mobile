@@ -1,24 +1,24 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import navigationReducer from "./slices/navigationSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const reducers = combineReducers({ navigation: navigationReducer });
+
 const persistedReducer = persistReducer(
   {
-    key: "root4",
+    key: "root",
     storage: AsyncStorage,
+    whitelist: [],
   },
-  navigationReducer
+  reducers
 );
 
 export const store = configureStore({
-  reducer: {
-    navigation: persistedReducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: true,
-      thunk: false,
+      serializableCheck: false,
     }),
 });
 

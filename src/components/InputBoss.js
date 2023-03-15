@@ -6,7 +6,11 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
+
+import { setSequenceHistoric } from "../app/store/slices/navigationSlice";
+
 import { useTailwind } from "tailwind-rn/dist";
+import { useSelector, useDispatch } from "react-redux";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -15,8 +19,13 @@ import isAndroid from "../utils/isAndroid";
 const InputBoss = memo(
   ({ pressOnSearch, optionsRef, hideOptions, ...rest }) => {
     const tw = useTailwind();
+    const dispatch = useDispatch();
 
     const [boxOpened, setBoxOpened] = useState(false);
+
+    const backPressClick = useSelector(
+      (state) => state.navigation.backPressClick
+    );
 
     return (
       <View>
@@ -49,16 +58,29 @@ const InputBoss = memo(
 
                 optionsRef?.current?.open();
                 setBoxOpened(true);
-                return;
               }}
               containerStyle={tw("px-6 bg-gray")}
             />
           )}
-          <ButtonBoss
-            title="Go"
-            containerStyle={tw("ml-2")}
-            onPress={pressOnSearch}
-          />
+          {backPressClick <= 1 || hideOptions ? (
+            <ButtonBoss
+              title="Go"
+              containerStyle={tw("ml-2")}
+              onPress={pressOnSearch}
+            />
+          ) : (
+            <ButtonBoss
+              icon={
+                <MaterialCommunityIcons
+                  name="chevron-right"
+                  color={tw("text-primary").color}
+                  size={22}
+                />
+              }
+              onPress={() => dispatch(setSequenceHistoric("advance"))}
+              containerStyle={tw("ml-2 bg-gray")}
+            />
+          )}
         </View>
       </View>
     );

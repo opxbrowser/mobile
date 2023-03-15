@@ -5,6 +5,8 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Keyboard,
+  BackHandler,
+  ToastAndroid,
 } from "react-native";
 
 import { WebView } from "react-native-webview";
@@ -12,6 +14,7 @@ import { StatusBar } from "expo-status-bar";
 import {
   setLastSearch,
   setLastSearchData,
+  setSequenceHistoric,
 } from "../app/store/slices/navigationSlice";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -26,6 +29,8 @@ import LoadingBar from "../components/LoadingBar";
 import isAndroid from "../utils/isAndroid";
 
 const Home = () => {
+  var CLICKS_PER_SECONDS = 0;
+
   const tw = useTailwind();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -52,17 +57,31 @@ const Home = () => {
   }, [address, lastSearch]);
 
   useEffect(() => {
-    let keyboard = [];
-
-    keyboard[0] = Keyboard.addListener("keyboardWillShow", () => {
+    Keyboard.addListener("keyboardDidShow", (e) => {
       setHideOptions(true);
     });
-
-    keyboard[1] = Keyboard.addListener("keyboardWillHide", () => {
+    Keyboard.addListener("keyboardDidHide", (e) => {
       setHideOptions(false);
     });
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      CLICKS_PER_SECONDS++;
 
-    return () => keyboard.map((item) => item.remove());
+      setTimeout(() => {
+        CLICKS_PER_SECONDS = 0;
+      }, 300);
+
+      if (CLICKS_PER_SECONDS >= 2) {
+        CLICKS_PER_SECONDS = 0;
+        return false;
+      }
+
+      ToastAndroid.show(
+        "Pressione duas vezes rápido para sair do navegador.",
+        ToastAndroid.SHORT
+      );
+      dispatch(setSequenceHistoric());
+      return true;
+    });
   }, []);
 
   const handleSearchAddress = (newAddress) => {
@@ -103,7 +122,6 @@ const Home = () => {
             behavior={!isAndroid() ? "padding" : "height"}
           >
             {!lastSearch && <EmptyState />}
-            <OptionsBox ref={refBoxOptions} />
             {lastSearch && (
               <WebView
                 style={tw("flex-1")}
@@ -129,6 +147,7 @@ const Home = () => {
               pressOnSearch={() => handleSearchAddress()}
               hideOptions={hideOptions}
             />
+            <OptionsBox ref={refBoxOptions} />
           </KeyboardAvoidingView>
         </View>
       </SafeAreaView>

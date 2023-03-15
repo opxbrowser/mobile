@@ -7,6 +7,7 @@ const navigationSlice = createSlice({
     lastSearchData: null,
     references: [],
     historic: [],
+    backPressClick: 1,
   },
   reducers: {
     setLastSearch(state, action) {
@@ -70,6 +71,21 @@ const navigationSlice = createSlice({
     clearReferences(state, action) {
       state.references = [];
     },
+    setSequenceHistoric(state, action) {
+      let historicPosition =
+        action.payload != "advance"
+          ? state.historic.length - (state.backPressClick + 1)
+          : state.historic.length - (state.backPressClick - 1);
+      let lastHistoricData = state.historic[historicPosition];
+
+      if (lastHistoricData) {
+        state.backPressClick =
+          action.payload != "advance"
+            ? state.backPressClick + 1
+            : state.backPressClick - 1;
+        state.lastSearch = lastHistoricData.url;
+      }
+    },
   },
 });
 
@@ -81,5 +97,6 @@ export const {
   addNewReferences,
   removeReferences,
   clearReferences,
+  setSequenceHistoric,
 } = navigationSlice.actions;
 export default navigationSlice.reducer;
