@@ -11,27 +11,24 @@ const navigationSlice = createSlice({
   },
   reducers: {
     setLastSearch(state, action) {
-      if (action.payload === null) {
-        state.lastSearch = null;
-        return;
-      }
-
       state.lastSearch = action.payload;
-
-      let lastItem =
-        state.historic[
-          state.historic.length > 0 ? state.historic.length - 1 : 0
-        ];
-      if (lastItem?.url != action.payload) {
-        state.historic.push({
-          id: state.historic.length + 1,
-          url: action.payload,
-          timestamp: new Date().valueOf(),
-        });
-      }
     },
     setLastSearchData(state, action) {
       state.lastSearchData = action.payload;
+
+      if (action.payload?.url) {
+        let lastItem =
+          state.historic[
+            state.historic.length > 0 ? state.historic.length - 1 : 0
+          ];
+        if (lastItem?.url != action.payload.url) {
+          state.historic.push({
+            id: state.historic.length + 1,
+            url: action.payload.url,
+            timestamp: new Date().valueOf(),
+          });
+        }
+      }
     },
     removeHistoric(state, action) {
       state.historic = state.historic.filter(
