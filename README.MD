@@ -10,7 +10,7 @@ For more information about Opx Browser, please visit the [official website](http
 
 ## Technologies
 
-[![Technologies](https://skills.thijs.gg/icons?i=js,git,firebase,react,redux,expo,tailwind)](https://skills.thijs.gg)
+[![Technologies](https://skills.thijs.gg/icons?i=js,git,firebase,react,redux,tailwind)](https://skills.thijs.gg)
 
 ## Source Code Repository
 
