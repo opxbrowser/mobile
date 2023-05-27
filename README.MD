@@ -6,6 +6,8 @@ Opx Browser is an open-source browser that prioritizes user privacy by not colle
 
 For more information about Opx Browser, please visit the [official website](https://www.opxbrowser.com).
 
+![Opx Browser App](https://imgur.com/gcOf9wm.png)
+
 ## Source Code Repository
 
 The source code for the Opx Browser website can be found in the GitHub repository: https://github.com/opxbrowser/web.
