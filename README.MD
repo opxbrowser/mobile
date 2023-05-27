@@ -8,6 +8,10 @@ For more information about Opx Browser, please visit the [official website](http
 
 ![Opx Browser App](https://imgur.com/gcOf9wm.png)
 
+## Technologies
+
+[![Technologies](https://skills.thijs.gg/icons?i=js,git,firebase,react,redux,expo,tailwind)](https://skills.thijs.gg)
+
 ## Source Code Repository
 
 The source code for the Opx Browser website can be found in the GitHub repository: https://github.com/opxbrowser/web.
