@@ -1,7 +1,7 @@
 export const websiteInfo = {
   URL: "https://opxbrowser.com",
   routes: {
-    about: "/about",
+    about: "/why",
     policy: "/policy",
     terms: "/terms",
   },
