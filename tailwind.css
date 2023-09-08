@@ -3,10 +3,27 @@
 }
 
 .inset-0 {
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px
+  inset: 0px
+}
+
+.top-12 {
+  top: 3rem
+}
+
+.bottom-12 {
+  bottom: 3rem
+}
+
+.bottom-40 {
+  bottom: 10rem
+}
+
+.bottom-32 {
+  bottom: 8rem
+}
+
+.bottom-44 {
+  bottom: 11rem
 }
 
 .z-10 {
@@ -93,6 +110,14 @@
 
 .mt-4 {
   margin-top: 1rem
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem
+}
+
+.flex {
+  display: flex
 }
 
 .h-1 {
@@ -192,6 +217,10 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.bg-transparent {
+  background-color: transparent
+}
+
 .p-4 {
   padding: 1rem
 }
@@ -262,6 +291,10 @@
 
 .font-wSemibold {
   font-family: WorkSans_600SemiBold
+}
+
+.font-wBold {
+  font-family: WorkSans_700Bold
 }
 
 .text-base {
